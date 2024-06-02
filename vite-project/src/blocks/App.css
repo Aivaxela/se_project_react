@@ -1,14 +1,16 @@
+@font-face {
+  src: url("../vendor/CabinetGrotesk_Complete/CabinetGrotesk_Complete/Fonts/OTF/CabinetGrotesk-Regular.otf");
+  font-family: "CabinetGrotesk";
+}
+
 .page {
   background-color: #f3f3f3;
 }
 
 .page__content {
   max-width: 1440px;
-  margin: 0 auto;
   font-weight: 700;
   padding: 0 40px;
-}
-
-body {
-  background-color: black;
+  margin: 0 auto;
+  font-family: "CabinetGrotesk";
 }

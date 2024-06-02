@@ -1,11 +1,5 @@
-@font-face {
-  src: url("../vendor/CabinetGrotesk_Complete/CabinetGrotesk_Complete/Fonts/OTF/CabinetGrotesk-Regular.otf");
-  font-family: "CabinetGrotesk";
-}
-
 .footer {
   padding: 32px 0 28px;
-  font-family: "CabinetGrotesk";
   font-size: 16px;
   font-weight: 500;
   line-height: 20px;
