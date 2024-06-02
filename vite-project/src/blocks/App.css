@@ -3,6 +3,12 @@
 }
 
 .page__content {
-  max-width: 1360px;
+  max-width: 1440px;
   margin: 0 auto;
+  font-weight: 700;
+  padding: 0 40px;
+}
+
+body {
+  background-color: black;
 }

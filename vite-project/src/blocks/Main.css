@@ -3,15 +3,13 @@
   font-family: "CabinetGrotesk";
 }
 
-.footer {
+.cards {
   padding: 32px 0 28px;
-  font-family: "CabinetGrotesk";
-  font-size: 16px;
-  font-weight: 500;
-  line-height: 20px;
 }
 
-.footer__text-container {
-  display: flex;
-  justify-content: space-between;
+.cards__text {
+  margin: 0;
+  font-family: "CabinetGrotesk";
+  font-size: 20px;
+  line-height: 24.8px;
 }
