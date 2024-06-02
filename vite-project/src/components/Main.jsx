@@ -1,8 +1,16 @@
-// import "../blocks/Main.css";
-// import avatarImg from "../assets/avatar.svg";
+import WeatherCard from "./WeatherCard";
 
 function Main() {
-  return <header className="header">{console.log("hello from main")}</header>;
+  return (
+    <main>
+      <WeatherCard />
+      <section className="cards">
+        <p className="cards__text">
+          Today is 75 &deg; F / You may want to wear:
+        </p>
+      </section>
+    </main>
+  );
 }
 
 export default Main;
