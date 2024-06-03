@@ -26,6 +26,29 @@
   border-radius: 20px;
 }
 
+.modal__container-preview {
+  padding: 0;
+  max-width: 498px;
+}
+
+.modal__preview {
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.modal__preview-image {
+  max-width: 100%;
+}
+
+.modal__preview-image-caption {
+  padding: 20px 0 20px 32px;
+}
+
+.modal__preview-image-caption-text {
+  margin: 0;
+  padding-bottom: 12px;
+}
+
 .modal__close {
   width: 16px;
   height: 16px;
