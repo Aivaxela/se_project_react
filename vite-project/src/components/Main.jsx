@@ -3,10 +3,10 @@ import WeatherCard from "./WeatherCard";
 import { defaultClothingItems } from "../utils/constants";
 import ItemCard from "./ItemCard";
 
-function Main({ weatherData, handleCardClick }) {
+function Main({ weatherData, handleCardClick, weatherImages }) {
   return (
     <main>
-      <WeatherCard weatherData={weatherData} />
+      <WeatherCard weatherData={weatherData} weatherImages={weatherImages} />
       <section className="cards">
         <p className="cards__text">
           Today is {Math.floor(weatherData.temp.F)}&deg; F / You may want to

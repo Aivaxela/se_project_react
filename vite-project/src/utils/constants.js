@@ -3,6 +3,13 @@ export const currentDate = new Date().toLocaleString("default", {
   day: "numeric",
 });
 
+export const coords = {
+  lat: 41.173511,
+  lon: -81.442964,
+};
+
+export const APIkey = "7c93fb5f777e89aa7c9dde871f2e1ee6";
+
 export const defaultClothingItems = [
   {
     _id: 0,
@@ -42,10 +49,9 @@ export const defaultClothingItems = [
   },
 ];
 
-export const coords = {
-  lat: 41.173511,
-  lon: -81.442964,
-};
-
-export const APIkey = "e6e12db293d2ad5ab680c2604bc83283";
-// export const APIkey = "7c93fb5f777e89aa7c9dde871f2e1ee6";
+export const weatherCardImages = [
+  {
+    name: "sunny",
+    link: "../assets/sunny.png",
+  },
+];

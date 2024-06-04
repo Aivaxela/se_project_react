@@ -1,6 +1,11 @@
 import { act, useEffect, useState } from "react";
 import "../blocks/App.css";
-import { currentDate, APIkey, coords } from "../utils/constants.js";
+import {
+  currentDate,
+  APIkey,
+  coords,
+  weatherCardImages,
+} from "../utils/constants.js";
 import { getWeather, filterWeatherData } from "../utils/weather.js";
 import Header from "./Header";
 import Main from "./Main";
@@ -46,7 +51,11 @@ function App() {
           weatherData={weatherData}
           handleAddClick={handleAddClick}
         />
-        <Main weatherData={weatherData} handleCardClick={handleCardClick} />
+        <Main
+          weatherData={weatherData}
+          handleCardClick={handleCardClick}
+          weatherImages={weatherCardImages}
+        />
         <Footer />
         <ModalWithForm
           title="New garment"
