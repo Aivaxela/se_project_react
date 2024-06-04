@@ -2,11 +2,13 @@ import "../blocks/Header.css";
 import headerLogo from "../assets/logo.svg";
 import avatarImg from "../assets/avatar.svg";
 
-function Header({ date, handleAddClick }) {
+function Header({ date, handleAddClick, weatherData }) {
   return (
     <header className="header">
       <img src={headerLogo} alt="wtwr logo" className="header__logo" />
-      <p>{date}</p>
+      <p>
+        {date} {weatherData.city}
+      </p>
       <button
         className="header__add-clothes-btn"
         type="button"
