@@ -52,6 +52,50 @@ export const defaultClothingItems = [
 export const weatherCardImages = [
   {
     name: "sunny",
-    link: "../assets/sunny.png",
+    link: "/src/assets/sunny.png",
+  },
+  {
+    name: "cloudy",
+    link: "/src/assets/cloudy.png",
+  },
+  {
+    name: "rain",
+    link: "/src/assets/rain.png",
+  },
+  {
+    name: "storm",
+    link: "/src/assets/storm.png",
+  },
+  {
+    name: "snow",
+    link: "/src/assets/snow.png",
+  },
+  {
+    name: "fog",
+    link: "/src/assets/fog.png",
+  },
+  {
+    name: "sunnyNight",
+    link: "/src/assets/sunny_night.png",
+  },
+  {
+    name: "cloudyNight",
+    link: "/src/assets/cloudy_night.png",
+  },
+  {
+    name: "rainNight",
+    link: "/src/assets/rain_night.png",
+  },
+  {
+    name: "stormNight",
+    link: "/src/assets/storm_night.png",
+  },
+  {
+    name: "snowNight",
+    link: "/src/assets/snow_night.png",
+  },
+  {
+    name: "fogNight",
+    link: "/src/assets/fog_night.png",
   },
 ];
