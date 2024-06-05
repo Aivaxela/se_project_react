@@ -11,10 +11,12 @@ export const getWeather = ({ lat, lon }, APIkey) => {
 };
 
 export const filterWeatherData = (data) => {
+  console.log(data);
   const result = {};
   result.city = data.name;
   result.temp = { F: data.main.temp, C: 999 };
   result.type = getWeatherType(result.temp.F);
+  result.weather = data.weather[0].main;
 
   return result;
 };

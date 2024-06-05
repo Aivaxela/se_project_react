@@ -15,8 +15,10 @@ import ItemModal from "./ItemModal.jsx";
 
 function App() {
   const [weatherData, setWeatherData] = useState({
-    type: "hot",
+    city: "cityname",
     temp: { F: 999, C: 999 },
+    type: "clothingtype",
+    weather: "weathertype",
   });
   const [activeModal, setActiveModal] = useState("");
   const [selectedCard, setSelectedCard] = useState({});
