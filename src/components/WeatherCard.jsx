@@ -1,10 +1,11 @@
 import "../blocks/WeatherCard.css";
-// import sunny from "../assets/sunny.png";
 
 function WeatherCard({ weatherData, weatherImages }) {
-  let weatherCardImage = weatherImages.find(
-    (item) => item.name === weatherData.weather
-  ) || { link: "./src/assets/day/sunny.png" };
+  const weatherCardImage = weatherImages.filter((item) => {
+    return item.name === weatherData.weather && item.day === weatherData.isDay;
+  });
+
+  console.log(weatherCardImage[0]?.url);
 
   return (
     <section className="weather-card">
@@ -12,7 +13,7 @@ function WeatherCard({ weatherData, weatherImages }) {
         {Math.floor(weatherData.temp.F)}&deg; F
       </p>
       <img
-        src={`${weatherCardImage.link}`}
+        src={`${weatherCardImage[0]?.url}`}
         alt={weatherData.weather}
         className="weather-card__image"
       />
