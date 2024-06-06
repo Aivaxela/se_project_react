@@ -11,6 +11,11 @@
   margin-left: auto;
   border-style: none;
   font: inherit;
+  cursor: pointer;
+}
+
+.header__add-clothes-btn:hover {
+  opacity: 60%;
 }
 
 .header__add-and-avatar {
