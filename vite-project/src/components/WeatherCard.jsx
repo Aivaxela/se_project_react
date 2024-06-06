@@ -1,10 +1,10 @@
 import "../blocks/WeatherCard.css";
-import sunny from "../assets/sunny.png";
+// import sunny from "../assets/sunny.png";
 
 function WeatherCard({ weatherData, weatherImages }) {
   let weatherCardImage = weatherImages.find(
     (item) => item.name === weatherData.weather
-  ) || { link: "./src/assets/sunny.png" };
+  ) || { link: "./src/assets/day/sunny.png" };
 
   return (
     <section className="weather-card">
@@ -13,7 +13,7 @@ function WeatherCard({ weatherData, weatherImages }) {
       </p>
       <img
         src={`${weatherCardImage.link}`}
-        alt="weather card image"
+        alt={weatherData.weather}
         className="weather-card__image"
       />
     </section>
