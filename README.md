@@ -1,4 +1,6 @@
-# WTWR
+# WTWR (What to Wear)
+
+A project created using React + Vite.
 
 View the app here:
 
