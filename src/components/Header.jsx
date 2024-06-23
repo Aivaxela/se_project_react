@@ -1,6 +1,7 @@
 import "../blocks/Header.css";
 import headerLogo from "../assets/logo.svg";
 import avatarImg from "../assets/avatar.svg";
+import ToggleSwitch from "./ToggleSwitch";
 
 function Header({ date, handleAddClick, weatherData }) {
   return (
@@ -9,6 +10,7 @@ function Header({ date, handleAddClick, weatherData }) {
       <p>
         {date} {weatherData.city}
       </p>
+      <ToggleSwitch className="header__temp-checkbox" />
       <button
         className="header__add-clothes-btn"
         type="button"
