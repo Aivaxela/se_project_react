@@ -9,6 +9,15 @@
 .header__temp-checkbox {
 }
 
+.header__profile-link {
+  text-decoration: none;
+  color: black;
+}
+
+.header__profile-link:hover {
+  opacity: 60%;
+}
+
 .header__add-clothes-btn {
   padding: 0;
   margin-left: auto;
@@ -21,7 +30,7 @@
   opacity: 60%;
 }
 
-.header__add-and-avatar {
+.header__name-and-avatar {
   align-items: center;
   display: flex;
 }

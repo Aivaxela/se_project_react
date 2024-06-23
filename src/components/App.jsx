@@ -1,4 +1,5 @@
 import { act, useEffect, useState } from "react";
+import { Routes, Route } from "react-router-dom";
 import "../blocks/App.css";
 import {
   currentDate,
@@ -9,6 +10,7 @@ import {
 import { getWeather, filterWeatherData } from "../utils/weather.js";
 import Header from "./Header";
 import Main from "./Main";
+import Profile from "./Profile";
 import Footer from "./Footer";
 import ModalWithForm from "./ModalWithForm.jsx";
 import ItemModal from "./ItemModal.jsx";
@@ -64,11 +66,19 @@ function App() {
             isFahrenheit={currentTempUnit}
             setIsFahrenheit={setCurrentTempUnit}
           />
-          <Main
-            weatherData={weatherData}
-            handleCardClick={handleCardClick}
-            weatherImages={weatherCardImages}
-          />
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <Main
+                  weatherData={weatherData}
+                  handleCardClick={handleCardClick}
+                  weatherImages={weatherCardImages}
+                />
+              }
+            />
+            <Route path="/profile" element={<Profile />} />
+          </Routes>
           <Footer />
           <ModalWithForm
             title="New garment"
