@@ -100,7 +100,6 @@
 .modal__radio-button {
   display: flex;
   gap: 11px;
-  cursor: pointer;
 }
 
 .modal__radio-button_unselected {

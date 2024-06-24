@@ -1,4 +1,4 @@
-import { act, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import "../blocks/App.css";
 import {
@@ -6,13 +6,14 @@ import {
   APIkey,
   coords,
   weatherCardImages,
+  defaultClothingItems,
 } from "../utils/constants.js";
 import { getWeather, filterWeatherData } from "../utils/weather.js";
 import Header from "./Header";
 import Main from "./Main";
 import Profile from "./Profile";
 import Footer from "./Footer";
-import ModalWithForm from "./ModalWithForm.jsx";
+import AddItemModal from "./AddItemModal.jsx";
 import ItemModal from "./ItemModal.jsx";
 import { CurrentTempContext } from "../contexts/CurrentTemperatureContext.js";
 
@@ -26,6 +27,7 @@ function App() {
   const [activeModal, setActiveModal] = useState("");
   const [selectedCard, setSelectedCard] = useState({});
   const [currentTempUnit, setCurrentTempUnit] = useState("F");
+  const [clothingItems, setClothingItems] = useState(defaultClothingItems);
 
   const handleCardClick = (card) => {
     setActiveModal("preview");
@@ -34,6 +36,14 @@ function App() {
 
   const handleAddClick = () => {
     setActiveModal("add-garment");
+  };
+
+  const onAddItem = (e, newItem) => {
+    console.log(newItem);
+    e.preventDefault();
+    setClothingItems([newItem, ...clothingItems]);
+    closeActiveModal();
+    console.log(clothingItems);
   };
 
   const closeActiveModal = () => {
@@ -74,73 +84,22 @@ function App() {
                   weatherData={weatherData}
                   handleCardClick={handleCardClick}
                   weatherImages={weatherCardImages}
+                  defaultClothingItems={clothingItems}
                 />
               }
             />
             <Route path="/profile" element={<Profile />} />
           </Routes>
           <Footer />
-          <ModalWithForm
-            title="New garment"
-            buttonText="Add garment"
+          <AddItemModal
             isOpen={activeModal === "add-garment"}
-            handleModalClose={closeActiveModal}
-          >
-            <label htmlFor="name" className="modal__label">
-              Name{" "}
-              <input
-                type="text"
-                className="modal__input"
-                id="name"
-                placeholder="Name"
-              />
-            </label>
-            <label htmlFor="imageUrl" className="modal__label">
-              Image{" "}
-              <input
-                type="url"
-                className="modal__input"
-                id="imageUrl"
-                placeholder="Image URL"
-              />
-            </label>
-            <fieldset className="modal__radio-buttons">
-              <legend className="modal__legend">
-                Select the weather type:
-              </legend>
-              <label htmlFor="hot" className="modal__radio-button">
-                <input
-                  type="radio"
-                  className="modal__radio-input"
-                  id="hot"
-                  name="weather"
-                />
-                Hot
-              </label>
-              <label htmlFor="warm" className="modal__radio-button">
-                <input
-                  type="radio"
-                  className="modal__radio-input"
-                  id="warm"
-                  name="weather"
-                />
-                Warm
-              </label>
-              <label htmlFor="cold" className="modal__radio-button">
-                <input
-                  type="radio"
-                  className="modal__radio-input"
-                  id="cold"
-                  name="weather"
-                />
-                Cold
-              </label>
-            </fieldset>
-          </ModalWithForm>
+            onModalClose={closeActiveModal}
+            onAddItem={onAddItem}
+          />
           <ItemModal
             isOpen={activeModal === "preview"}
             card={selectedCard}
-            handleModalClose={closeActiveModal}
+            onModalClose={closeActiveModal}
           />
         </CurrentTempContext.Provider>
       </div>

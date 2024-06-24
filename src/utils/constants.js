@@ -63,27 +63,27 @@ export const weatherCardImages = [
   {
     name: "rain",
     day: true,
-    link: "./src/assets/day/rain.png",
+    url: new URL("../assets/day/rain.png", import.meta.url).href,
   },
   {
     name: "storm",
     day: true,
-    link: "./src/assets/day/storm.png",
+    url: new URL("../assets/day/storm.png", import.meta.url).href,
   },
   {
     name: "snow",
     day: true,
-    link: "./src/assets/day/snow.png",
+    url: new URL("../assets/day/snow.png", import.meta.url).href,
   },
   {
     name: "fog",
     day: true,
-    link: "./src/assets/day/fog.png",
+    url: new URL("../assets/day/fog.png", import.meta.url).href,
   },
   {
     name: "clear",
     day: false,
-    link: "./src/assets/night/clear.png",
+    url: new URL("../assets/night/clear.png", import.meta.url).href,
   },
   {
     name: "clouds",
@@ -93,21 +93,21 @@ export const weatherCardImages = [
   {
     name: "rain",
     day: false,
-    link: "./src/assets/night/rain.png",
+    url: new URL("../assets/night/rain.png", import.meta.url).href,
   },
   {
     name: "storm",
     day: false,
-    link: "./src/assets/night/storm.png",
+    url: new URL("../assets/night/storm.png", import.meta.url).href,
   },
   {
     name: "snow",
     day: false,
-    link: "./src/assets/night/snow.png",
+    url: new URL("../assets/night/snow.png", import.meta.url).href,
   },
   {
     name: "fog",
     day: false,
-    link: "./src/assets/night/fog.png",
+    url: new URL("../assets/night/fog.png", import.meta.url).href,
   },
 ];

@@ -7,7 +7,9 @@ import { Link } from "react-router-dom";
 function Header({ date, handleAddClick, weatherData }) {
   return (
     <header className="header">
-      <img src={headerLogo} alt="wtwr logo" className="header__logo" />
+      <Link to="/">
+        <img src={headerLogo} alt="wtwr logo" className="header__logo" />
+      </Link>
       <p>
         {date} {weatherData.city}
       </p>

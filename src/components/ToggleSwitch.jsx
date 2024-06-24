@@ -9,6 +9,7 @@ function ToggleSwitch(className) {
     <input
       className={className}
       type="checkbox"
+      id="temp"
       onChange={() => currentTempContext.handleTempUnitToggle()}
     />
   );

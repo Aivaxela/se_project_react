@@ -1,15 +1,11 @@
 import "../blocks/Modal.css";
 import close from "../assets/close.svg";
 
-function ItemModal({ card, handleModalClose, isOpen }) {
+function ItemModal({ card, onModalClose, isOpen }) {
   return (
     <div className={`modal ${isOpen ? "modal_opened" : ""}`}>
       <div className="modal__container modal__container-preview">
-        <button
-          className="modal__close"
-          type="button"
-          onClick={handleModalClose}
-        >
+        <button className="modal__close" type="button" onClick={onModalClose}>
           <img src={close} alt="close button" className="modal__close-icon" />
         </button>
         <div className="modal__preview">
