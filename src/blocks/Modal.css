@@ -40,6 +40,10 @@
   max-width: 100%;
 }
 
+.modal__preview-image-text-conatiner {
+  display: flex;
+}
+
 .modal__preview-image-caption {
   padding: 20px 0 20px 32px;
 }
@@ -47,6 +51,17 @@
 .modal__preview-image-caption-text {
   margin: 0;
   padding-bottom: 12px;
+}
+.modal__card-delete {
+  margin-left: auto;
+  padding-right: 32px;
+  font-size: 20px;
+  color: #ff4d00;
+}
+
+.modal__card-delete:hover {
+  opacity: 60%;
+  cursor: pointer;
 }
 
 .modal__close {

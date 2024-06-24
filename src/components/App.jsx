@@ -16,6 +16,7 @@ import Footer from "./Footer";
 import AddItemModal from "./AddItemModal.jsx";
 import ItemModal from "./ItemModal.jsx";
 import { CurrentTempContext } from "../contexts/CurrentTemperatureContext.js";
+import DeleteConfirmModal from "./DeleteConfirmModal.jsx";
 
 function App() {
   const [weatherData, setWeatherData] = useState({
@@ -38,12 +39,15 @@ function App() {
     setActiveModal("add-garment");
   };
 
+  const handleDeleteClick = () => {
+    setActiveModal("delete");
+  };
+
   const onAddItem = (e, newItem) => {
-    console.log(newItem);
     e.preventDefault();
+    newItem._id = clothingItems.length;
     setClothingItems([newItem, ...clothingItems]);
     closeActiveModal();
-    console.log(clothingItems);
   };
 
   const closeActiveModal = () => {
@@ -99,6 +103,11 @@ function App() {
           <ItemModal
             isOpen={activeModal === "preview"}
             card={selectedCard}
+            onModalClose={closeActiveModal}
+            onDeleteClick={handleDeleteClick}
+          />
+          <DeleteConfirmModal
+            isOpen={activeModal === "delete"}
             onModalClose={closeActiveModal}
           />
         </CurrentTempContext.Provider>

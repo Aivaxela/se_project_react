@@ -14,6 +14,7 @@ function AddItemModal({ isOpen, onModalClose, onAddItem }) {
       onModalClose={onModalClose}
       onSubmit={(e) => {
         const newItem = {
+          _id: null,
           name: nameInputEl.value,
           weather: selectedType,
           link: imageInputEl.value,

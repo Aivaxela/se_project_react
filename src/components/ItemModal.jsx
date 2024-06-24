@@ -1,7 +1,7 @@
 import "../blocks/Modal.css";
 import close from "../assets/close.svg";
 
-function ItemModal({ card, onModalClose, isOpen }) {
+function ItemModal({ card, onModalClose, isOpen, onDeleteClick }) {
   return (
     <div className={`modal ${isOpen ? "modal_opened" : ""}`}>
       <div className="modal__container modal__container-preview">
@@ -14,10 +14,21 @@ function ItemModal({ card, onModalClose, isOpen }) {
             alt={card.name}
             className="modal__preview-image"
           />
-          <div className="modal__preview-image-caption">
-            <p className="modal__preview-image-caption-text">{card.name}</p>
-            <p className="modal__preview-image-caption-text">
-              Weather: {card.weather}
+          <div className="modal__preview-image-text-conatiner">
+            <div className="modal__preview-image-caption">
+              <p className="modal__preview-image-caption-text">{card.name}</p>
+              <p className="modal__preview-image-caption-text">
+                Weather: {card.weather}
+              </p>
+            </div>
+            <p
+              className="modal__card-delete"
+              onClick={() => {
+                onModalClose();
+                onDeleteClick();
+              }}
+            >
+              Delete item
             </p>
           </div>
         </div>
