@@ -16,17 +16,12 @@ function ItemModal({ card, onModalClose, isOpen, onDeleteClick }) {
           />
           <div className="modal__preview-image-text-conatiner">
             <div className="modal__preview-image-caption">
-              <p className="modal__preview-image-caption-text">{card.name}</p>
-              <p className="modal__preview-image-caption-text">
-                Weather: {card.weather}
-              </p>
+              <p className="modal__subtext">{card.name}</p>
+              <p className="modal__subtext">Weather: {card.weather}</p>
             </div>
             <p
-              className="modal__card-delete"
-              onClick={() => {
-                onModalClose();
-                onDeleteClick();
-              }}
+              className="modal__card-delete modal__el_hovered"
+              onClick={onDeleteClick}
             >
               Delete item
             </p>

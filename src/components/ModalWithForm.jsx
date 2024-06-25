@@ -18,7 +18,11 @@ function ModalWithForm({
         </button>
         <form action="" className="modal__form">
           {children}
-          <button className="modal__submit" type="submit" onClick={onSubmit}>
+          <button
+            className="modal__submit modal__el_hovered"
+            type="submit"
+            onClick={onSubmit}
+          >
             {buttonText}
           </button>
         </form>

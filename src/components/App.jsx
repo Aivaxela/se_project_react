@@ -39,8 +39,16 @@ function App() {
     setActiveModal("add-garment");
   };
 
-  const handleDeleteClick = () => {
+  const openConfirmDelete = () => {
     setActiveModal("delete");
+  };
+
+  const handleDeleteClick = () => {
+    const updatedArr = clothingItems.filter(
+      (item) => item._id !== selectedCard._id
+    );
+    setClothingItems(updatedArr);
+    setActiveModal("");
   };
 
   const onAddItem = (e, newItem) => {
@@ -104,11 +112,12 @@ function App() {
             isOpen={activeModal === "preview"}
             card={selectedCard}
             onModalClose={closeActiveModal}
-            onDeleteClick={handleDeleteClick}
+            onDeleteClick={openConfirmDelete}
           />
           <DeleteConfirmModal
             isOpen={activeModal === "delete"}
             onModalClose={closeActiveModal}
+            onDeleteClick={handleDeleteClick}
           />
         </CurrentTempContext.Provider>
       </div>

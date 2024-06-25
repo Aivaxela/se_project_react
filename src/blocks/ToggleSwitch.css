@@ -1,0 +1,52 @@
+.toggleswitch {
+  margin-right: 20px;
+  min-width: 56px;
+  min-height: 28px;
+  border: solid 2px #7e7e7e;
+  border-radius: 20px;
+  position: relative;
+  box-sizing: border-box;
+  cursor: pointer;
+}
+
+.toggleswitch:hover {
+  border-color: #000;
+}
+
+.toggleswitch__text {
+  position: absolute;
+  top: 1px;
+  left: 7px;
+  color: #fff;
+  font-size: 14px;
+}
+
+.toggleswitch__text:last-of-type {
+  left: 38px;
+}
+
+.toggleswitch__text_inactive {
+  color: #000;
+  opacity: 50%;
+}
+
+.toggleswitch:hover > .toggleswitch__text.toggleswitch__text_inactive {
+  color: black;
+  opacity: 100%;
+}
+
+.toggleswitch__circle {
+  position: absolute;
+  left: -2px;
+  top: -2px;
+  width: 28px;
+  height: 28px;
+  background-color: black;
+  border-radius: 20px;
+  transition: left 0.1s linear;
+}
+
+.toggleswitch__circle_celcius {
+  left: 28px;
+  transition: left 0.1s linear;
+}
