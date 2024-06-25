@@ -1,5 +1,5 @@
-import React from "react";
 import "../blocks/Cards.css";
+import React from "react";
 import WeatherCard from "./WeatherCard";
 import Cards from "./Cards";
 import { CurrentTempContext } from "../contexts/CurrentTemperatureContext";
@@ -16,10 +16,9 @@ function Main({ weatherData, handleCardClick, weatherImages, clothingItems }) {
           {currentTempUnit} / You may want to wear:
         </p>
         <Cards
-          cardsClass="cards__list"
-          isTempFiltered={true}
           clothingItems={clothingItems}
           onCardClick={handleCardClick}
+          isTempFiltered={true}
           weatherData={weatherData}
         />
       </section>

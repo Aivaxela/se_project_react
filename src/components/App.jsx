@@ -95,8 +95,8 @@ function App() {
                 <Main
                   weatherData={weatherData}
                   handleCardClick={handleCardClick}
-                  weatherImages={weatherCardImages}
                   clothingItems={clothingItems}
+                  weatherImages={weatherCardImages}
                 />
               }
             />
@@ -104,6 +104,7 @@ function App() {
               path="/profile"
               element={
                 <Profile
+                  weatherData={weatherData}
                   handleCardClick={handleCardClick}
                   clothingItems={clothingItems}
                 />
