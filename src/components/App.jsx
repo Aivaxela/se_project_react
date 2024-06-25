@@ -96,11 +96,19 @@ function App() {
                   weatherData={weatherData}
                   handleCardClick={handleCardClick}
                   weatherImages={weatherCardImages}
-                  defaultClothingItems={clothingItems}
+                  clothingItems={clothingItems}
                 />
               }
             />
-            <Route path="/profile" element={<Profile />} />
+            <Route
+              path="/profile"
+              element={
+                <Profile
+                  handleCardClick={handleCardClick}
+                  clothingItems={clothingItems}
+                />
+              }
+            />
           </Routes>
           <Footer />
           <AddItemModal
