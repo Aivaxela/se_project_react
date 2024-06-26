@@ -17,6 +17,7 @@ import AddItemModal from "./AddItemModal.jsx";
 import ItemModal from "./ItemModal.jsx";
 import { CurrentTempContext } from "../contexts/CurrentTemperatureContext.js";
 import DeleteConfirmModal from "./DeleteConfirmModal.jsx";
+import { clothingItems } from "../utils/api.js";
 
 function App() {
   const [weatherData, setWeatherData] = useState({
