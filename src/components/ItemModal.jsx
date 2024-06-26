@@ -10,7 +10,7 @@ function ItemModal({ card, onModalClose, isOpen, onDeleteClick }) {
         </button>
         <div className="modal__preview">
           <img
-            src={card.link}
+            src={card.imageUrl}
             alt={card.name}
             className="modal__preview-image"
           />

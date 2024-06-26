@@ -17,7 +17,7 @@ function AddItemModal({ isOpen, onModalClose, onAddItem }) {
           _id: null,
           name: nameInputEl.value,
           weather: selectedType,
-          link: imageInputEl.value,
+          imageUrl: imageInputEl.value,
         };
         onAddItem(e, newItem);
       }}

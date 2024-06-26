@@ -13,8 +13,9 @@ function Cards({
   return (
     <ul className="cards__list">
       {filteredCards.map((item) => {
+        if (!item._id) return;
         return (
-          <ItemCard key={item._id} item={item} onCardClick={onCardClick} />
+          <ItemCard key={item?._id} item={item} onCardClick={onCardClick} />
         );
       })}
     </ul>
