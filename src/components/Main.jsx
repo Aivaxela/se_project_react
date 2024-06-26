@@ -10,18 +10,16 @@ function Main({ weatherData, handleCardClick, weatherImages, clothingItems }) {
   return (
     <main>
       <WeatherCard weatherData={weatherData} weatherImages={weatherImages} />
-      <section className="cards">
-        <p className="cards__text">
-          Today is {Math.floor(weatherData.temp[currentTempUnit])}&deg;{" "}
-          {currentTempUnit} / You may want to wear:
-        </p>
-        <Cards
-          clothingItems={clothingItems}
-          onCardClick={handleCardClick}
-          isTempFiltered={true}
-          weatherData={weatherData}
-        />
-      </section>
+      <p className="cards__text">
+        Today is {Math.floor(weatherData.temp[currentTempUnit])}&deg;{" "}
+        {currentTempUnit} / You may want to wear:
+      </p>
+      <Cards
+        clothingItems={clothingItems}
+        onCardClick={handleCardClick}
+        isTempFiltered={true}
+        weatherData={weatherData}
+      />
     </main>
   );
 }

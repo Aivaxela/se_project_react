@@ -11,15 +11,13 @@ function Cards({
     : clothingItems;
 
   return (
-    <section className="cards">
-      <ul className="cards__list">
-        {filteredCards.map((item) => {
-          return (
-            <ItemCard key={item._id} item={item} onCardClick={onCardClick} />
-          );
-        })}
-      </ul>
-    </section>
+    <ul className="cards__list">
+      {filteredCards.map((item) => {
+        return (
+          <ItemCard key={item._id} item={item} onCardClick={onCardClick} />
+        );
+      })}
+    </ul>
   );
 }
 

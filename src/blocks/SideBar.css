@@ -1,9 +1,12 @@
 .sidebar {
-  padding-top: 32px;
-  width: 10%;
+  width: 20%;
 }
 
 .sidebar__user-container {
   display: flex;
   gap: 20px;
+}
+
+.sidebar__username {
+  overflow-wrap: break-word;
 }
