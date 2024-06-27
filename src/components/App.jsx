@@ -10,7 +10,7 @@ import ItemModal from "./ItemModal.jsx";
 import DeleteConfirmModal from "./DeleteConfirmModal.jsx";
 import "../blocks/App.css";
 import { CurrentTempContext } from "../contexts/CurrentTemperatureContext.js";
-import { getClothingItems } from "../utils/api.js";
+import Api from "../utils/api.js";
 import {
   currentDate,
   APIkey,
@@ -36,19 +36,50 @@ function App() {
   const [selectedCard, setSelectedCard] = useState({});
   const [currentTempUnit, setCurrentTempUnit] = useState("F");
 
+  const api = new Api({
+    baseUrl: "http://localhost:3001",
+  });
+
   useEffect(() => {
-    getClothingItems().then((res) => setClothingItems(res));
+    api.getClothingItems().then((res) => setClothingItems(res));
     getWeather(coords, APIkey)
       .then((data) => {
         const filterData = filterWeatherData(data);
         setWeatherData(filterData);
       })
-      .catch(console.error);
+      .catch((err) => alert(err));
   }, []);
+
+  const handleAddItem = (e, newItem, clearInputs) => {
+    e.preventDefault();
+    newItem._id = assignId();
+    api
+      .addClothingItem(newItem)
+      .then((res) => {
+        setClothingItems([res, ...clothingItems]);
+        closeActiveModal();
+        clearInputs();
+      })
+      .catch((err) => alert(err));
+  };
+
+  const handleDeleteItem = () => {
+    api
+      .deleteClothingItem(selectedCard._id)
+      .then(() => {
+        const updatedArr = clothingItems.filter(
+          (item) => item._id !== selectedCard._id
+        );
+        setClothingItems(updatedArr);
+        setActiveModal("");
+      })
+      .catch((err) => alert(err));
+  };
 
   const handleCardClick = (card) => {
     setActiveModal("preview");
     setSelectedCard(card);
+    console.log(clothingItems);
   };
 
   const handleAddClick = () => {
@@ -63,23 +94,21 @@ function App() {
     setActiveModal("");
   };
 
-  const handleDeleteItem = () => {
-    const updatedArr = clothingItems.filter(
-      (item) => item._id !== selectedCard._id
-    );
-    setClothingItems(updatedArr);
-    setActiveModal("");
-  };
-
-  const handleAddItem = (e, newItem) => {
-    e.preventDefault();
-    newItem._id = clothingItems.length;
-    setClothingItems([newItem, ...clothingItems]);
-    closeActiveModal();
-  };
-
   const handleTempUnitToggle = () => {
     currentTempUnit === "F" ? setCurrentTempUnit("C") : setCurrentTempUnit("F");
+  };
+
+  const assignId = () => {
+    const itemsSorted = clothingItems.sort((a, b) => a._id - b._id);
+    let toCheck = 1;
+    for (let i = 0; i < itemsSorted.length; i++) {
+      if (toCheck === itemsSorted[i]._id) {
+        toCheck++;
+        continue;
+      } else {
+        return toCheck;
+      }
+    }
   };
 
   return (
@@ -114,6 +143,7 @@ function App() {
                   weatherData={weatherData}
                   handleCardClick={handleCardClick}
                   clothingItems={clothingItems}
+                  handleAddClick={handleAddClick}
                 />
               }
             />

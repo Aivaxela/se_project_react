@@ -6,6 +6,11 @@ function AddItemModal({ isOpen, onModalClose, onAddItem }) {
   const nameInputEl = document.querySelector("#name");
   const imageInputEl = document.querySelector("#imageUrl");
 
+  const clearInputs = () => {
+    nameInputEl.value = "";
+    imageInputEl.value = "";
+  };
+
   return (
     <ModalWithForm
       title="New garment"
@@ -19,7 +24,7 @@ function AddItemModal({ isOpen, onModalClose, onAddItem }) {
           weather: selectedType,
           imageUrl: imageInputEl.value,
         };
-        onAddItem(e, newItem);
+        onAddItem(e, newItem, clearInputs);
       }}
     >
       <label htmlFor="name" className="modal__label">
@@ -29,6 +34,9 @@ function AddItemModal({ isOpen, onModalClose, onAddItem }) {
           className="modal__input"
           id="name"
           placeholder="Name"
+          minlength="2"
+          maxlength="40"
+          required
         />
       </label>
       <label htmlFor="imageUrl" className="modal__label">
@@ -38,6 +46,7 @@ function AddItemModal({ isOpen, onModalClose, onAddItem }) {
           className="modal__input"
           id="imageUrl"
           placeholder="Image URL"
+          required
         />
       </label>
       <fieldset className="modal__radio-buttons">
@@ -50,6 +59,7 @@ function AddItemModal({ isOpen, onModalClose, onAddItem }) {
             id="hot"
             checked={selectedType === "hot"}
             onChange={() => setSelectedType("hot")}
+            required
           />
           Hot
         </label>
