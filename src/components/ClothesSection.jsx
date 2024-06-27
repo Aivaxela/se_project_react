@@ -1,7 +1,7 @@
 import "../blocks/Clothes.css";
 import Cards from "./Cards";
 
-function Clothes({ handleCardClick, handleAddClick, clothingItems }) {
+function ClothesSection({ handleCardClick, handleAddClick, clothingItems }) {
   return (
     <section className="clothes">
       <div className="clothes__heading-container">
@@ -15,4 +15,4 @@ function Clothes({ handleCardClick, handleAddClick, clothingItems }) {
   );
 }
 
-export default Clothes;
+export default ClothesSection;

@@ -1,12 +1,12 @@
 import "../blocks/Profile.css";
 import SideBar from "./SideBar";
-import Clothes from "./Clothes";
+import ClothesSection from "./ClothesSection";
 
 function Profile({ handleCardClick, clothingItems, handleAddClick }) {
   return (
     <section className="profile">
       <SideBar />
-      <Clothes
+      <ClothesSection
         handleCardClick={handleCardClick}
         handleAddClick={handleAddClick}
         clothingItems={clothingItems}

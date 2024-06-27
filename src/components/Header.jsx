@@ -25,7 +25,7 @@ function Header({ date, handleAddClick, weatherData }) {
           + Add clothes
         </button>
         <Link
-          to={"profile"}
+          to={"/profile"}
           className="header__profile-link header__el_hovered"
         >
           <div className="header__name-and-avatar">
