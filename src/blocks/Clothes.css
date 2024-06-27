@@ -23,3 +23,13 @@
   opacity: 60%;
   cursor: pointer;
 }
+
+@media screen and (max-width: 600px) {
+  .clothes {
+    width: 100%;
+  }
+
+  .clothes__heading-container {
+    padding-bottom: 16px;
+  }
+}

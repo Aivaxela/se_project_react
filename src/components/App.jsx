@@ -42,7 +42,7 @@ function App() {
   });
 
   useEffect(() => {
-    api.getClothingItems().then((res) => setClothingItems(res));
+    api.getClothingItems().then((res) => setClothingItems(res.reverse()));
     getWeather(coords, APIkey)
       .then((data) => {
         const filterData = filterWeatherData(data);

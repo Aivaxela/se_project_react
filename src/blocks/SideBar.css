@@ -10,3 +10,9 @@
 .sidebar__username {
   overflow-wrap: break-word;
 }
+
+@media screen and (max-width: 600px) {
+  .sidebar {
+    display: none;
+  }
+}

@@ -13,7 +13,7 @@ function AddItemModal({ isOpen, onModalClose, onAddItem }) {
   const addFormValidator = new Validator(formEl, setFormValid);
   addFormValidator.initializeFormEl();
 
-  const reset = () => {
+  const resetForm = () => {
     nameInputEl.value = "";
     imageInputEl.value = "";
     setFormValid(false);
@@ -32,7 +32,7 @@ function AddItemModal({ isOpen, onModalClose, onAddItem }) {
           weather: selectedType,
           imageUrl: imageInputEl.value,
         };
-        onAddItem(e, newItem, reset);
+        onAddItem(e, newItem, resetForm);
       }}
       formValid={formValid}
     >

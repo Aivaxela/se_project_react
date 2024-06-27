@@ -14,3 +14,9 @@
   margin: 0 auto;
   font-family: "CabinetGrotesk";
 }
+
+@media screen and (max-width: 600px) {
+  .page__content {
+    padding: 0 16px;
+  }
+}

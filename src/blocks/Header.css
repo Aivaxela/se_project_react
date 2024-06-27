@@ -46,3 +46,16 @@
   margin: 0;
   padding-left: 20px;
 }
+
+@media screen and (max-width: 600px) {
+  .header {
+    padding: 0 0 28px;
+    flex-direction: column;
+  }
+
+  .header__group {
+    padding: 20px 0;
+    border-bottom: 2px solid;
+    border-color: rgba(0, 0, 0, 0.3);
+  }
+}

@@ -9,9 +9,21 @@
 }
 
 .cards__list {
+  margin: 0;
   padding: 0;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(325px, min-content));
   justify-content: center;
   grid-gap: 20px 20px;
+}
+
+@media screen and (max-width: 600px) {
+  .cards__list {
+    grid-template-columns: repeat(auto-fit, minmax(164px, min-content));
+    grid-gap: 15px 15px;
+  }
+
+  .cards__text {
+    display: none;
+  }
 }
