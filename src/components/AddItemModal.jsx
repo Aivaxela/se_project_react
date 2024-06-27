@@ -1,14 +1,22 @@
 import { useState } from "react";
 import ModalWithForm from "./ModalWithForm";
+import Validator from "../utils/validator";
 
 function AddItemModal({ isOpen, onModalClose, onAddItem }) {
   const [selectedType, setSelectedType] = useState("hot");
+  const [formValid, setFormValid] = useState(false);
+  const [nameErrorMsg, setNameErrorMsg] = useState("");
+  const [imageUrlErrorMsg, setImageUrlErrorMsg] = useState("");
   const nameInputEl = document.querySelector("#name");
   const imageInputEl = document.querySelector("#imageUrl");
+  const formEl = document.querySelector("#add-form");
+  const addFormValidator = new Validator(formEl, setFormValid);
+  addFormValidator.initializeFormEl();
 
-  const clearInputs = () => {
+  const reset = () => {
     nameInputEl.value = "";
     imageInputEl.value = "";
+    setFormValid(false);
   };
 
   return (
@@ -24,30 +32,45 @@ function AddItemModal({ isOpen, onModalClose, onAddItem }) {
           weather: selectedType,
           imageUrl: imageInputEl.value,
         };
-        onAddItem(e, newItem, clearInputs);
+        onAddItem(e, newItem, reset);
       }}
+      formValid={formValid}
     >
       <label htmlFor="name" className="modal__label">
-        Name{" "}
+        Name
         <input
           type="text"
           className="modal__input"
           id="name"
           placeholder="Name"
-          minlength="2"
-          maxlength="40"
+          minLength="4"
+          maxLength="16"
           required
+          onChange={() => {
+            setNameErrorMsg(addFormValidator.handleErrorMessage("name"));
+          }}
         />
+        <span className="modal__input-error" id="name-error">
+          {nameErrorMsg}
+        </span>
       </label>
       <label htmlFor="imageUrl" className="modal__label">
-        Image{" "}
+        Image
         <input
           type="url"
           className="modal__input"
           id="imageUrl"
           placeholder="Image URL"
           required
+          onChange={() => {
+            setImageUrlErrorMsg(
+              addFormValidator.handleErrorMessage("imageUrl")
+            );
+          }}
         />
+        <span className="modal__input-error" id="imageUrl-error">
+          {imageUrlErrorMsg}
+        </span>
       </label>
       <fieldset className="modal__radio-buttons">
         <legend className="modal__legend">Select the weather type:</legend>

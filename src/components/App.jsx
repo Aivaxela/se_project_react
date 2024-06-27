@@ -27,6 +27,7 @@ function App() {
   });
   const [clothingItems, setClothingItems] = useState([
     {
+      _id: "",
       imageUrl: "",
       name: "",
       weather: "",
@@ -50,7 +51,7 @@ function App() {
       .catch((err) => alert(err));
   }, []);
 
-  const handleAddItem = (e, newItem, clearInputs) => {
+  const handleAddItem = (e, newItem, resetForm) => {
     e.preventDefault();
     newItem._id = assignId();
     api
@@ -58,7 +59,7 @@ function App() {
       .then((res) => {
         setClothingItems([res, ...clothingItems]);
         closeActiveModal();
-        clearInputs();
+        resetForm();
       })
       .catch((err) => alert(err));
   };
@@ -79,7 +80,6 @@ function App() {
   const handleCardClick = (card) => {
     setActiveModal("preview");
     setSelectedCard(card);
-    console.log(clothingItems);
   };
 
   const handleAddClick = () => {

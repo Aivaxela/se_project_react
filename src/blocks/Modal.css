@@ -112,6 +112,15 @@
   border-color: #000;
 }
 
+.modal__input-error {
+  color: red;
+  display: none;
+}
+
+.modal__input-error_visible {
+  display: block;
+}
+
 .modal__label {
   padding-bottom: 28px;
 }
@@ -149,6 +158,7 @@
 
 .modal__submit_disabled {
   opacity: 30%;
+  pointer-events: none;
 }
 
 .modal__el_hovered:hover {
