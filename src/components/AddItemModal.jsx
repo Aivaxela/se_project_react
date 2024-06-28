@@ -1,11 +1,15 @@
-import { useState } from "react";
 import ModalWithForm from "./ModalWithForm";
 import { useFormAndValidation } from "../utils/useFormAndValidation";
+import { useEffect } from "react";
 
 function AddItemModal({ isOpen, onModalClose, onAddItem, isLoading }) {
-  const [selectedType, setSelectedType] = useState("hot");
-  const { values, handleChange, errors, isValid, resetForm } =
+  const { values, handleChange, errors, isValid, resetForm, setValues } =
     useFormAndValidation();
+
+  const resetCurrentForm = () => {
+    resetForm({ name: "", imageUrl: "", weather: "" });
+  };
+  useEffect(() => setValues({ weather: "hot" }), []);
 
   return (
     <ModalWithForm
@@ -14,14 +18,14 @@ function AddItemModal({ isOpen, onModalClose, onAddItem, isLoading }) {
       isOpen={isOpen}
       onModalClose={onModalClose}
       onSubmit={(e) => {
+        e.preventDefault();
         const newItem = {
           _id: null,
           name: values.name,
-          weather: selectedType,
+          weather: values.weather,
           imageUrl: values.imageUrl,
         };
-        onAddItem(e, newItem);
-        resetForm({ name: "", imageUrl: "" });
+        onAddItem(newItem, resetCurrentForm);
       }}
       formValid={isValid}
     >
@@ -37,7 +41,7 @@ function AddItemModal({ isOpen, onModalClose, onAddItem, isLoading }) {
           maxLength="16"
           required
           onChange={handleChange}
-          value={values.name}
+          value={values.name || ""}
         />
         <span
           className={`modal__input-error ${
@@ -58,7 +62,7 @@ function AddItemModal({ isOpen, onModalClose, onAddItem, isLoading }) {
           placeholder="Image URL"
           required
           onChange={handleChange}
-          value={values.imageUrl}
+          value={values.imageUrl || ""}
         />
         <span
           className={`modal__input-error ${
@@ -77,9 +81,10 @@ function AddItemModal({ isOpen, onModalClose, onAddItem, isLoading }) {
             className="modal__radio-input"
             name="weather"
             id="hot"
-            checked={selectedType === "hot"}
-            onChange={() => setSelectedType("hot")}
+            checked={values.weather === "hot"}
+            onChange={handleChange}
             required
+            value="hot"
           />
           Hot
         </label>
@@ -89,8 +94,10 @@ function AddItemModal({ isOpen, onModalClose, onAddItem, isLoading }) {
             className="modal__radio-input"
             name="weather"
             id="warm"
-            checked={selectedType === "warm"}
-            onChange={() => setSelectedType("warm")}
+            checked={values.weather === "warm"}
+            onChange={handleChange}
+            required
+            value="warm"
           />
           Warm
         </label>
@@ -100,8 +107,10 @@ function AddItemModal({ isOpen, onModalClose, onAddItem, isLoading }) {
             className="modal__radio-input"
             name="weather"
             id="cold"
-            checked={selectedType === "cold"}
-            onChange={() => setSelectedType("cold")}
+            checked={values.weather === "cold"}
+            onChange={handleChange}
+            required
+            value="cold"
           />
           Cold
         </label>

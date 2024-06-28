@@ -55,14 +55,14 @@ function App() {
       .catch((err) => alert(err));
   }, []);
 
-  const handleAddItem = (e, newItem) => {
-    e.preventDefault();
+  const handleAddItem = (newItem, resetCurrentForm) => {
     setIsLoading(true);
     newItem._id = assignId();
     api
       .addClothingItem(newItem)
       .then((res) => {
         setClothingItems([res, ...clothingItems]);
+        resetCurrentForm();
         closeActiveModal();
       })
       .catch((err) => alert(err))

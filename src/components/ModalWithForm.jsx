@@ -17,12 +17,7 @@ function ModalWithForm({
         <button className="modal__close" type="button" onClick={onModalClose}>
           <img src={close} alt="close button" className="modal__close-icon" />
         </button>
-        <form
-          action=""
-          className="modal__form"
-          id="add-form"
-          onSubmit={onSubmit}
-        >
+        <form action="" className="modal__form" onSubmit={onSubmit}>
           {children}
           <button
             className={`modal__submit modal__el_hovered ${
