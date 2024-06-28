@@ -4,11 +4,9 @@ export default class Api {
   }
 
   getClothingItems() {
-    return fetch(`${this._baseUrl}/items`).then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-    });
+    return fetch(`${this._baseUrl}/items`).then((res) =>
+      this._checkResponse(res)
+    );
   }
 
   addClothingItem(item) {
@@ -21,21 +19,13 @@ export default class Api {
         weather: item.weather,
         imageUrl: item.imageUrl,
       }),
-    }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-    });
+    }).then((res) => this._checkResponse(res));
   }
 
   deleteClothingItem(itemId) {
     return fetch(`${this._baseUrl}/items/${itemId}`, {
       method: "DELETE",
-    }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-    });
+    }).then((res) => this._checkResponse(res));
   }
 
   _checkResponse(res) {

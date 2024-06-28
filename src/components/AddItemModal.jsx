@@ -1,40 +1,29 @@
 import { useState } from "react";
 import ModalWithForm from "./ModalWithForm";
-import Validator from "../utils/validator";
+import { useFormAndValidation } from "../utils/useFormAndValidation";
 
-function AddItemModal({ isOpen, onModalClose, onAddItem }) {
+function AddItemModal({ isOpen, onModalClose, onAddItem, isLoading }) {
   const [selectedType, setSelectedType] = useState("hot");
-  const [formValid, setFormValid] = useState(false);
-  const [nameErrorMsg, setNameErrorMsg] = useState("");
-  const [imageUrlErrorMsg, setImageUrlErrorMsg] = useState("");
-  const nameInputEl = document.querySelector("#name");
-  const imageInputEl = document.querySelector("#imageUrl");
-  const formEl = document.querySelector("#add-form");
-  const addFormValidator = new Validator(formEl, setFormValid);
-  addFormValidator.initializeFormEl();
-
-  const resetForm = () => {
-    nameInputEl.value = "";
-    imageInputEl.value = "";
-    setFormValid(false);
-  };
+  const { values, handleChange, errors, isValid, resetForm } =
+    useFormAndValidation();
 
   return (
     <ModalWithForm
       title="New garment"
-      buttonText="Add garment"
+      buttonText={isLoading ? "Saving..." : "Add garment"}
       isOpen={isOpen}
       onModalClose={onModalClose}
       onSubmit={(e) => {
         const newItem = {
           _id: null,
-          name: nameInputEl.value,
+          name: values.name,
           weather: selectedType,
-          imageUrl: imageInputEl.value,
+          imageUrl: values.imageUrl,
         };
-        onAddItem(e, newItem, resetForm);
+        onAddItem(e, newItem);
+        resetForm({ name: "", imageUrl: "" });
       }}
-      formValid={formValid}
+      formValid={isValid}
     >
       <label htmlFor="name" className="modal__label">
         Name
@@ -42,16 +31,21 @@ function AddItemModal({ isOpen, onModalClose, onAddItem }) {
           type="text"
           className="modal__input"
           id="name"
+          name="name"
           placeholder="Name"
           minLength="4"
           maxLength="16"
           required
-          onChange={() => {
-            setNameErrorMsg(addFormValidator.handleErrorMessage("name"));
-          }}
+          onChange={handleChange}
+          value={values.name}
         />
-        <span className="modal__input-error" id="name-error">
-          {nameErrorMsg}
+        <span
+          className={`modal__input-error ${
+            errors.name ? "modal__input-error_visible" : ""
+          }`}
+          id="name-error"
+        >
+          {errors.name}
         </span>
       </label>
       <label htmlFor="imageUrl" className="modal__label">
@@ -60,16 +54,19 @@ function AddItemModal({ isOpen, onModalClose, onAddItem }) {
           type="url"
           className="modal__input"
           id="imageUrl"
+          name="imageUrl"
           placeholder="Image URL"
           required
-          onChange={() => {
-            setImageUrlErrorMsg(
-              addFormValidator.handleErrorMessage("imageUrl")
-            );
-          }}
+          onChange={handleChange}
+          value={values.imageUrl}
         />
-        <span className="modal__input-error" id="imageUrl-error">
-          {imageUrlErrorMsg}
+        <span
+          className={`modal__input-error ${
+            errors.imageUrl ? "modal__input-error_visible" : ""
+          }`}
+          id="imageUrl-error"
+        >
+          {errors.imageUrl}
         </span>
       </label>
       <fieldset className="modal__radio-buttons">

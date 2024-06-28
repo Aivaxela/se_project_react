@@ -18,6 +18,10 @@ import {
   weatherCardImages,
 } from "../utils/constants.js";
 
+const api = new Api({
+  baseUrl: "http://localhost:3001",
+});
+
 function App() {
   const [weatherData, setWeatherData] = useState({
     city: "cityname",
@@ -36,13 +40,13 @@ function App() {
   const [activeModal, setActiveModal] = useState("");
   const [selectedCard, setSelectedCard] = useState({});
   const [currentTempUnit, setCurrentTempUnit] = useState("F");
-
-  const api = new Api({
-    baseUrl: "http://localhost:3001",
-  });
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    api.getClothingItems().then((res) => setClothingItems(res.reverse()));
+    api
+      .getClothingItems()
+      .then((res) => setClothingItems(res.reverse()))
+      .catch((err) => alert(err));
     getWeather(coords, APIkey)
       .then((data) => {
         const filterData = filterWeatherData(data);
@@ -51,17 +55,18 @@ function App() {
       .catch((err) => alert(err));
   }, []);
 
-  const handleAddItem = (e, newItem, resetForm) => {
+  const handleAddItem = (e, newItem) => {
     e.preventDefault();
+    setIsLoading(true);
     newItem._id = assignId();
     api
       .addClothingItem(newItem)
       .then((res) => {
         setClothingItems([res, ...clothingItems]);
         closeActiveModal();
-        resetForm();
       })
-      .catch((err) => alert(err));
+      .catch((err) => alert(err))
+      .finally(() => setIsLoading(false));
   };
 
   const handleDeleteItem = () => {
@@ -72,7 +77,7 @@ function App() {
           (item) => item._id !== selectedCard._id
         );
         setClothingItems(updatedArr);
-        setActiveModal("");
+        closeActiveModal();
       })
       .catch((err) => alert(err));
   };
@@ -93,6 +98,13 @@ function App() {
   const closeActiveModal = () => {
     setActiveModal("");
   };
+
+  useEffect(() => {
+    if (!activeModal) return;
+    const handleEscClose = (e) => e.key === "Escape" && closeActiveModal();
+    document.addEventListener("keydown", handleEscClose);
+    return () => document.removeEventListener("keydown", handleEscClose);
+  }, [activeModal]);
 
   const handleTempUnitToggle = () => {
     currentTempUnit === "F" ? setCurrentTempUnit("C") : setCurrentTempUnit("F");
@@ -153,6 +165,7 @@ function App() {
             isOpen={activeModal === "add-garment"}
             onModalClose={closeActiveModal}
             onAddItem={handleAddItem}
+            isLoading={isLoading}
           />
           <ItemModal
             isOpen={activeModal === "preview"}
