@@ -34,8 +34,6 @@ const getWeatherType = (temp) => {
     return "hot";
   } else if (temp >= 60 && temp < 80) {
     return "warm";
-  } else if (temp >= 45 && temp < 60) {
-    return "chilly";
   } else {
     return "cold";
   }
