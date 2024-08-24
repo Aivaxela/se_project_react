@@ -165,6 +165,15 @@
   pointer-events: none;
 }
 
+.modal__text-button {
+  padding: 0 0 0 16px;
+  height: 36px;
+  border-style: none;
+  font-weight: 700;
+  background-color: #fff;
+  cursor: pointer;
+}
+
 .modal__el_hovered:hover {
   opacity: 60%;
   cursor: pointer;

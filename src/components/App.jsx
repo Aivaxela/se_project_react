@@ -7,6 +7,7 @@ import Profile from "./Profile";
 import Footer from "./Footer";
 import AddItemModal from "./AddItemModal.jsx";
 import RegisterModal from "./RegisterModal.jsx";
+import LoginModal from "./LoginModal.jsx";
 import ItemModal from "./ItemModal.jsx";
 import DeleteConfirmModal from "./DeleteConfirmModal.jsx";
 import "../blocks/App.css";
@@ -91,8 +92,13 @@ function App() {
   const handleAddClick = () => {
     setActiveModal("add-garment");
   };
+
   const handleRegisterClick = () => {
     setActiveModal("register");
+  };
+
+  const handleLoginClick = () => {
+    setActiveModal("login");
   };
 
   const openConfirmDelete = () => {
@@ -174,6 +180,13 @@ function App() {
           />
           <RegisterModal
             isOpen={activeModal === "register"}
+            handleLoginClick={handleLoginClick}
+            onModalClose={closeActiveModal}
+            isLoading={isLoading}
+          />
+          <LoginModal
+            isOpen={activeModal === "login"}
+            handleRegisterClick={handleRegisterClick}
             onModalClose={closeActiveModal}
             isLoading={isLoading}
           />
