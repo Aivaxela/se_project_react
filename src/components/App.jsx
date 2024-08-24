@@ -144,6 +144,7 @@ function App() {
             weatherData={weatherData}
             handleAddClick={handleAddClick}
             handleRegisterClick={handleRegisterClick}
+            handleLoginClick={handleLoginClick}
             isFahrenheit={currentTempUnit}
             setIsFahrenheit={setCurrentTempUnit}
           />

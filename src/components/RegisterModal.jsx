@@ -31,13 +31,13 @@ function RegisterModal({ isOpen, handleLoginClick, onModalClose, isLoading }) {
         }}
         formValid={isValid}
       >
-        <label htmlFor="email" className="modal__label">
+        <label htmlFor="email-signup" className="modal__label">
           Email
           <input
             type="email"
             className="modal__input"
             id="email-signup"
-            name="email-signup"
+            name="email"
             placeholder="Email"
             minLength="4"
             maxLength="64"
@@ -54,13 +54,13 @@ function RegisterModal({ isOpen, handleLoginClick, onModalClose, isLoading }) {
             {errors.email}
           </span>
         </label>
-        <label htmlFor="password" className="modal__label">
+        <label htmlFor="password-signup" className="modal__label">
           Password
           <input
             type="password"
             className="modal__input"
             id="password-signup"
-            name="password-signup"
+            name="password"
             placeholder="Password"
             minLength="8"
             maxLength="64"
@@ -77,13 +77,13 @@ function RegisterModal({ isOpen, handleLoginClick, onModalClose, isLoading }) {
             {errors.password}
           </span>
         </label>
-        <label htmlFor="name" className="modal__label">
+        <label htmlFor="name-signup" className="modal__label">
           Name
           <input
             type="text"
             className="modal__input"
             id="name-signup"
-            name="name-signup"
+            name="name"
             placeholder="Name"
             minLength="4"
             maxLength="16"

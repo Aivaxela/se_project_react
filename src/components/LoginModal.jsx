@@ -28,13 +28,13 @@ function LoginModal({ isOpen, handleRegisterClick, onModalClose, isLoading }) {
         }}
         formValid={isValid}
       >
-        <label htmlFor="email" className="modal__label">
+        <label htmlFor="email-login" className="modal__label">
           Email
           <input
             type="email"
             className="modal__input"
             id="email-login"
-            name="email-login"
+            name="email"
             placeholder="Email"
             minLength="4"
             maxLength="64"
@@ -51,13 +51,13 @@ function LoginModal({ isOpen, handleRegisterClick, onModalClose, isLoading }) {
             {errors.email}
           </span>
         </label>
-        <label htmlFor="password" className="modal__label">
+        <label htmlFor="password-login" className="modal__label">
           Password
           <input
             type="password"
             className="modal__input"
             id="password-login"
-            name="password-login"
+            name="password"
             placeholder="Password"
             required
             onChange={handleChange}

@@ -29,13 +29,13 @@ function AddItemModal({ isOpen, onModalClose, onAddItem, isLoading }) {
       }}
       formValid={isValid}
     >
-      <label htmlFor="name" className="modal__label">
+      <label htmlFor="name-addItem" className="modal__label">
         Name
         <input
           type="text"
           className="modal__input"
           id="name-addItem"
-          name="name-addItem"
+          name="name"
           placeholder="Name"
           minLength="4"
           maxLength="16"
