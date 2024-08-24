@@ -6,6 +6,7 @@ import Main from "./Main";
 import Profile from "./Profile";
 import Footer from "./Footer";
 import AddItemModal from "./AddItemModal.jsx";
+import RegisterModal from "./RegisterModal.jsx";
 import ItemModal from "./ItemModal.jsx";
 import DeleteConfirmModal from "./DeleteConfirmModal.jsx";
 import "../blocks/App.css";
@@ -90,6 +91,9 @@ function App() {
   const handleAddClick = () => {
     setActiveModal("add-garment");
   };
+  const handleRegisterClick = () => {
+    setActiveModal("register");
+  };
 
   const openConfirmDelete = () => {
     setActiveModal("delete");
@@ -133,6 +137,7 @@ function App() {
             date={currentDate}
             weatherData={weatherData}
             handleAddClick={handleAddClick}
+            handleRegisterClick={handleRegisterClick}
             isFahrenheit={currentTempUnit}
             setIsFahrenheit={setCurrentTempUnit}
           />
@@ -165,6 +170,11 @@ function App() {
             isOpen={activeModal === "add-garment"}
             onModalClose={closeActiveModal}
             onAddItem={handleAddItem}
+            isLoading={isLoading}
+          />
+          <RegisterModal
+            isOpen={activeModal === "register"}
+            onModalClose={closeActiveModal}
             isLoading={isLoading}
           />
           <ItemModal

@@ -4,7 +4,7 @@ import avatarImg from "../assets/avatar.svg";
 import ToggleSwitch from "./ToggleSwitch";
 import { Link } from "react-router-dom";
 
-function Header({ date, handleAddClick, weatherData }) {
+function Header({ date, handleAddClick, handleRegisterClick, weatherData }) {
   return (
     <header className="header">
       <div className="header__group">
@@ -23,6 +23,13 @@ function Header({ date, handleAddClick, weatherData }) {
           onClick={handleAddClick}
         >
           + Add clothes
+        </button>
+        <button
+          className="header__add-clothes-btn header__el_hovered"
+          type="button"
+          onClick={handleRegisterClick}
+        >
+          Sign Up
         </button>
         <Link
           to={"/profile"}
