@@ -1,12 +1,22 @@
 import ModalWithForm from "./ModalWithForm";
 import { useFormAndValidation } from "../utils/useFormAndValidation";
 
-function RegisterModal({ isOpen, handleLoginClick, onModalClose, isLoading }) {
+function RegisterModal({
+  isOpen,
+  handleLoginClick,
+  onModalClose,
+  isLoading,
+  handleRegistration,
+}) {
   const { values, handleChange, errors, isValid, resetForm, setValues } =
     useFormAndValidation();
 
+  const handleSubmit = () => {
+    handleRegistration(values);
+  };
+
   const resetCurrentForm = () => {
-    resetForm({ email: "", password: "", name: "", avatarUrl: "" });
+    resetForm({ email: "", password: "", username: "", avatarUrl: "" });
   };
 
   return (
@@ -18,17 +28,7 @@ function RegisterModal({ isOpen, handleLoginClick, onModalClose, isLoading }) {
         altButtonClick={handleLoginClick}
         isOpen={isOpen}
         onModalClose={onModalClose}
-        onSubmit={(e) => {
-          e.preventDefault();
-          const newUser = {
-            _id: null,
-            email: values.email,
-            password: values.password,
-            name: values.name,
-            avatarUrl: values.avatarUrl,
-          };
-          //TODO: pass new user
-        }}
+        onSubmit={handleSubmit}
         formValid={isValid}
       >
         <label htmlFor="email-signup" className="modal__label">
@@ -83,21 +83,21 @@ function RegisterModal({ isOpen, handleLoginClick, onModalClose, isLoading }) {
             type="text"
             className="modal__input"
             id="name-signup"
-            name="name"
+            name="username"
             placeholder="Name"
             minLength="4"
             maxLength="16"
             required
             onChange={handleChange}
-            value={values.name || ""}
+            value={values.username || ""}
           />
           <span
             className={`modal__input-error ${
-              errors.name ? "modal__input-error_visible" : ""
+              errors.username ? "modal__input-error_visible" : ""
             }`}
             id="name-error"
           >
-            {errors.name}
+            {errors.username}
           </span>
         </label>
         <label htmlFor="avatarUrl" className="modal__label">

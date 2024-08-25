@@ -1,10 +1,9 @@
-import React from "react";
+import { useContext } from "react";
 import "../blocks/ToggleSwitch.css";
 import { AppContext } from "../contexts/AppContexts";
 
 function ToggleSwitch() {
-  const { currentTempUnit, handleTempUnitToggle } =
-    React.useContext(AppContext);
+  const { currentTempUnit, handleTempUnitToggle } = useContext(AppContext);
   return (
     <div className={"toggleswitch"} onClick={() => handleTempUnitToggle()}>
       <div

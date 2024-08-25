@@ -1,6 +1,10 @@
 import { useEffect, useState } from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useNavigate } from "react-router-dom";
 import { getWeather, filterWeatherData } from "../utils/weather.js";
+import { register, authorize } from "../utils/auth.js";
+import { AppContext } from "../contexts/AppContexts.js";
+import "../blocks/App.css";
+import Api from "../utils/api.js";
 import Header from "./Header";
 import Main from "./Main";
 import Profile from "./Profile";
@@ -10,9 +14,7 @@ import RegisterModal from "./RegisterModal.jsx";
 import LoginModal from "./LoginModal.jsx";
 import ItemModal from "./ItemModal.jsx";
 import DeleteConfirmModal from "./DeleteConfirmModal.jsx";
-import "../blocks/App.css";
-import { AppContext } from "../contexts/AppContexts.js";
-import Api from "../utils/api.js";
+import ProtectedRoute from "./ProtectedRoute.jsx";
 import {
   currentDate,
   APIkey,
@@ -48,7 +50,7 @@ function App() {
   useEffect(() => {
     api
       .getClothingItems()
-      .then((res) => setClothingItems(res.reverse()))
+      .then((res) => setClothingItems(res))
       .catch((err) => alert(err));
     getWeather(coords, APIkey)
       .then((data) => {
@@ -110,6 +112,8 @@ function App() {
     setActiveModal("");
   };
 
+  const navigate = useNavigate();
+
   useEffect(() => {
     if (!activeModal) return;
     const handleEscClose = (e) => e.key === "Escape" && closeActiveModal();
@@ -119,6 +123,15 @@ function App() {
 
   const handleTempUnitToggle = () => {
     currentTempUnit === "F" ? setCurrentTempUnit("C") : setCurrentTempUnit("F");
+  };
+
+  const handleRegistration = (values) => {
+    register(values)
+      .then(() => {
+        //TODO: sign user in
+        closeActiveModal();
+      })
+      .catch(console.error);
   };
 
   const assignId = () => {
@@ -169,12 +182,14 @@ function App() {
             <Route
               path="/profile"
               element={
-                <Profile
-                  weatherData={weatherData}
-                  handleCardClick={handleCardClick}
-                  clothingItems={clothingItems}
-                  handleAddClick={handleAddClick}
-                />
+                <ProtectedRoute>
+                  <Profile
+                    weatherData={weatherData}
+                    handleCardClick={handleCardClick}
+                    clothingItems={clothingItems}
+                    handleAddClick={handleAddClick}
+                  />
+                </ProtectedRoute>
               }
             />
           </Routes>
@@ -190,6 +205,7 @@ function App() {
             handleLoginClick={handleLoginClick}
             onModalClose={closeActiveModal}
             isLoading={isLoading}
+            handleRegistration={handleRegistration}
           />
           <LoginModal
             isOpen={activeModal === "login"}
