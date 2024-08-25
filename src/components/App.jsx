@@ -50,7 +50,7 @@ function App() {
   useEffect(() => {
     api
       .getClothingItems()
-      .then((res) => setClothingItems(res))
+      .then((res) => setClothingItems(res.data))
       .catch((err) => alert(err));
     getWeather(coords, APIkey)
       .then((data) => {
