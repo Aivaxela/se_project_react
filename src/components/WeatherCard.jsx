@@ -1,12 +1,12 @@
 import React from "react";
 import "../blocks/WeatherCard.css";
-import { CurrentTempContext } from "../contexts/CurrentTemperatureContext";
+import { AppContext } from "../contexts/AppContexts";
 
 function WeatherCard({ weatherData, weatherImages }) {
   const weatherCardImage = weatherImages.find((item) => {
     return item.name === weatherData.weather && item.day === weatherData.isDay;
   });
-  const currentTempUnit = React.useContext(CurrentTempContext).currentTempUnit;
+  const { currentTempUnit } = React.useContext(AppContext);
 
   return (
     <section className="weather-card">

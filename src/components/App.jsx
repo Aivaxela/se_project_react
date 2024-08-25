@@ -11,7 +11,7 @@ import LoginModal from "./LoginModal.jsx";
 import ItemModal from "./ItemModal.jsx";
 import DeleteConfirmModal from "./DeleteConfirmModal.jsx";
 import "../blocks/App.css";
-import { CurrentTempContext } from "../contexts/CurrentTemperatureContext.js";
+import { AppContext } from "../contexts/AppContexts.js";
 import Api from "../utils/api.js";
 import {
   currentDate,
@@ -43,6 +43,7 @@ function App() {
   const [selectedCard, setSelectedCard] = useState({});
   const [currentTempUnit, setCurrentTempUnit] = useState("F");
   const [isLoading, setIsLoading] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
     api
@@ -133,12 +134,17 @@ function App() {
     }
   };
 
+  const contexts = {
+    currentTempUnit,
+    handleTempUnitToggle,
+    isLoggedIn,
+    setIsLoggedIn,
+  };
+
   return (
     <div className="page">
       <div className="page__content">
-        <CurrentTempContext.Provider
-          value={{ currentTempUnit, handleTempUnitToggle }}
-        >
+        <AppContext.Provider value={contexts}>
           <Header
             date={currentDate}
             weatherData={weatherData}
@@ -202,7 +208,7 @@ function App() {
             onModalClose={closeActiveModal}
             onDeleteClick={handleDeleteItem}
           />
-        </CurrentTempContext.Provider>
+        </AppContext.Provider>
       </div>
     </div>
   );
