@@ -17,8 +17,7 @@ function AddItemModal({ isOpen, onModalClose, onAddItem, isLoading }) {
       buttonText={isLoading ? "Saving..." : "Add garment"}
       isOpen={isOpen}
       onModalClose={onModalClose}
-      onSubmit={(e) => {
-        e.preventDefault();
+      onSubmit={() => {
         const newItem = {
           _id: null,
           name: values.name,

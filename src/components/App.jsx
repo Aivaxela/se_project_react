@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Routes, Route, useNavigate } from "react-router-dom";
 import { getWeather, filterWeatherData } from "../utils/weather.js";
 import { register, authorize } from "../utils/auth.js";
-import { setToken, getToken } from "../utils/token.js";
+import { setToken, getToken, removeToken } from "../utils/token.js";
 import { AppContext } from "../contexts/AppContexts.js";
 import "../blocks/App.css";
 import Api from "../utils/api.js";
@@ -163,6 +163,12 @@ function App() {
     });
   };
 
+  const handleSignout = () => {
+    removeToken();
+    navigate("/");
+    setIsLoggedIn(false);
+  };
+
   const assignId = () => {
     const itemsSorted = clothingItems.sort((a, b) => a._id - b._id);
     let toCheck = 1;
@@ -217,6 +223,7 @@ function App() {
                     handleCardClick={handleCardClick}
                     clothingItems={clothingItems}
                     handleAddClick={handleAddClick}
+                    handleSignout={handleSignout}
                   />
                 </ProtectedRoute>
               }
