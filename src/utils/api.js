@@ -3,6 +3,19 @@ export default class Api {
     this._baseUrl = baseUrl;
   }
 
+  getCurrentUser = (token) => {
+    return fetch(`${this._baseUrl}/users/me`, {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    }).then((res) => {
+      return res.ok ? res.json() : Promise.reject(`Error: ${res.status}`);
+    });
+  };
+
   getClothingItems() {
     return fetch(`${this._baseUrl}/items`).then((res) =>
       this._checkResponse(res)

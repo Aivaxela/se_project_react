@@ -13,14 +13,14 @@ export const register = ({ username, password, email, avatarUrl }) => {
   });
 };
 
-export const authorize = ({ identifier, password }) => {
+export const authorize = ({ email, password }) => {
   return fetch(`${BASE_URL}/signin`, {
     method: "POST",
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ identifier, password }),
+    body: JSON.stringify({ email, password }),
   }).then((res) => {
     return res.ok ? res.json() : Promise.reject(`Error ${res.status}`);
   });

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Routes, Route, useNavigate } from "react-router-dom";
 import { getWeather, filterWeatherData } from "../utils/weather.js";
 import { register, authorize } from "../utils/auth.js";
+import { setToken, getToken } from "../utils/token.js";
 import { AppContext } from "../contexts/AppContexts.js";
 import "../blocks/App.css";
 import Api from "../utils/api.js";
@@ -46,6 +47,7 @@ function App() {
   const [currentTempUnit, setCurrentTempUnit] = useState("F");
   const [isLoading, setIsLoading] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [userData, setUserData] = useState({ username: "", email: "" });
 
   useEffect(() => {
     api
@@ -125,6 +127,19 @@ function App() {
     currentTempUnit === "F" ? setCurrentTempUnit("C") : setCurrentTempUnit("F");
   };
 
+  useEffect(() => {
+    const jwt = getToken();
+    if (!jwt) return;
+
+    api
+      .getCurrentUser(jwt)
+      .then(({ username, email }) => {
+        setIsLoggedIn(true);
+        setUserData({ username, email });
+      })
+      .catch(console.error);
+  }, []);
+
   const handleRegistration = (values) => {
     register(values)
       .then(() => {
@@ -132,6 +147,20 @@ function App() {
         closeActiveModal();
       })
       .catch(console.error);
+  };
+
+  const handleLogin = (values) => {
+    if (!values) return;
+
+    authorize(values).then((data) => {
+      if (data.token) {
+        setToken(data.token);
+        setUserData(data.user);
+        setIsLoggedIn(true);
+        const redirectPath = location.state?.from?.pathname || "/";
+        navigate(redirectPath);
+      }
+    });
   };
 
   const assignId = () => {
@@ -210,6 +239,7 @@ function App() {
           <LoginModal
             isOpen={activeModal === "login"}
             handleRegisterClick={handleRegisterClick}
+            handleLogin={handleLogin}
             onModalClose={closeActiveModal}
             isLoading={isLoading}
           />

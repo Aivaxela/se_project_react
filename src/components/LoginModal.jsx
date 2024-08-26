@@ -1,9 +1,19 @@
 import ModalWithForm from "./ModalWithForm";
 import { useFormAndValidation } from "../utils/useFormAndValidation";
 
-function LoginModal({ isOpen, handleRegisterClick, onModalClose, isLoading }) {
+function LoginModal({
+  isOpen,
+  handleRegisterClick,
+  handleLogin,
+  onModalClose,
+  isLoading,
+}) {
   const { values, handleChange, errors, isValid, resetForm, setValues } =
     useFormAndValidation();
+
+  const handleSubmit = () => {
+    handleLogin(values);
+  };
 
   const resetCurrentForm = () => {
     resetForm({ email: "", password: "" });
@@ -18,14 +28,7 @@ function LoginModal({ isOpen, handleRegisterClick, onModalClose, isLoading }) {
         altButtonClick={handleRegisterClick}
         isOpen={isOpen}
         onModalClose={onModalClose}
-        onSubmit={(e) => {
-          e.preventDefault();
-          const loginData = {
-            email: values.email,
-            password: values.password,
-          };
-          //TODO: pass login data
-        }}
+        onSubmit={handleSubmit}
         formValid={isValid}
       >
         <label htmlFor="email-login" className="modal__label">
