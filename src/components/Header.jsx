@@ -13,7 +13,7 @@ function Header({
   handleLoginClick,
   weatherData,
 }) {
-  const { isLoggedIn } = useContext(CurrentUserContext);
+  const { isLoggedIn, userData } = useContext(CurrentUserContext);
 
   return (
     <header className="header">
@@ -54,11 +54,17 @@ function Header({
         </button>
         <Link
           to={"/profile"}
-          className="header__profile-link header__el_hovered"
+          className={`header__profile-link header__el_hovered ${
+            !isLoggedIn ? "header__el_hidden" : ""
+          }`}
         >
-          <div className="header__name-and-avatar">
-            <p className="header__username">Riley Marcum</p>
-            <img src={avatarImg} alt="avatar" className="header__avatar" />
+          <div className={"header__name-and-avatar"}>
+            <p className="header__username">{userData.name}</p>
+            <img
+              src={avatarImg}
+              alt="avatar"
+              className={"header__avatar header__el_hovered"}
+            />
           </div>
         </Link>
       </div>

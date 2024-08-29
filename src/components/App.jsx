@@ -30,7 +30,7 @@ function App() {
   const [currentTempUnit, setCurrentTempUnit] = useState("F");
   const [isLoading, setIsLoading] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [userData, setUserData] = useState({ username: "", email: "" });
+  const [userData, setUserData] = useState({ name: "" });
   const [protectedDestination, setProtectedDestination] = useState("");
   const [authLoaded, setAuthLoaded] = useState(false);
 
@@ -74,10 +74,10 @@ function App() {
     }
     api
       .getCurrentUser(jwt)
-      .then(({ username, email }) => {
+      .then((userData) => {
         setIsLoggedIn(true);
         setAuthLoaded(true);
-        setUserData({ username, email });
+        setUserData({ name: userData.data.name });
       })
       .catch(console.error);
   }, []);
@@ -168,7 +168,7 @@ function App() {
       .then((data) => {
         if (data.token) {
           setToken(data.token);
-          setUserData(data.user);
+          setUserData({ name: data.name });
           setIsLoggedIn(true);
           navigate(protectedDestination || "/");
           setProtectedDestination("");
@@ -183,6 +183,7 @@ function App() {
     removeToken();
     navigate("/");
     setIsLoggedIn(false);
+    setUserData({ name: "" });
   };
 
   const assignId = () => {
@@ -206,6 +207,7 @@ function App() {
   const currentUserContext = {
     isLoggedIn,
     authLoaded,
+    userData,
     protectedDestination,
     setProtectedDestination,
   };
