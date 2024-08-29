@@ -8,6 +8,15 @@
   gap: 20px;
 }
 
+.sidebar__user-avatar {
+  height: 56px;
+  width: 56px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1px solid;
+  border-color: rgba(0, 0, 0, 0.5);
+}
+
 .sidebar__username {
   overflow-wrap: break-word;
 }

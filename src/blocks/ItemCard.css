@@ -28,6 +28,13 @@
   object-fit: cover;
 }
 
+@media screen and (max-width: 990px) {
+  .card__image {
+    width: 270px;
+    height: 273px;
+  }
+}
+
 @media screen and (max-width: 600px) {
   .card__image {
     width: 164px;
