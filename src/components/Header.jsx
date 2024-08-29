@@ -4,7 +4,7 @@ import avatarImg from "../assets/avatar.svg";
 import ToggleSwitch from "./ToggleSwitch";
 import { Link } from "react-router-dom";
 import { useContext } from "react";
-import { AppContext } from "../contexts/AppContexts";
+import { CurrentUserContext } from "../contexts/CurrentUserContext";
 
 function Header({
   date,
@@ -13,7 +13,7 @@ function Header({
   handleLoginClick,
   weatherData,
 }) {
-  const { isLoggedIn } = useContext(AppContext);
+  const { isLoggedIn } = useContext(CurrentUserContext);
 
   return (
     <header className="header">

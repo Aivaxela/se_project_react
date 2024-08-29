@@ -25,7 +25,10 @@ export default class Api {
   addClothingItem(item) {
     return fetch(`${this._baseUrl}/items`, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
       body: JSON.stringify({
         _id: item._id,
         name: item.name,
@@ -38,6 +41,10 @@ export default class Api {
   deleteClothingItem(itemId) {
     return fetch(`${this._baseUrl}/items/${itemId}`, {
       method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
     }).then((res) => this._checkResponse(res));
   }
 

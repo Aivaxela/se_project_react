@@ -1,9 +1,10 @@
 import { useContext } from "react";
 import "../blocks/ToggleSwitch.css";
-import { AppContext } from "../contexts/AppContexts";
+import { CurrentTempContext } from "../contexts/CurrentTemperatureContext";
 
 function ToggleSwitch() {
-  const { currentTempUnit, handleTempUnitToggle } = useContext(AppContext);
+  const { currentTempUnit, handleTempUnitToggle } =
+    useContext(CurrentTempContext);
   return (
     <div className={"toggleswitch"} onClick={() => handleTempUnitToggle()}>
       <div

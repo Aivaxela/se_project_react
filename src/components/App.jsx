@@ -3,7 +3,8 @@ import { Routes, Route, useNavigate } from "react-router-dom";
 import { getWeather, filterWeatherData } from "../utils/weather.js";
 import { register, authorize } from "../utils/auth.js";
 import { setToken, getToken, removeToken } from "../utils/token.js";
-import { AppContext } from "../contexts/AppContexts.js";
+import { CurrentTempContext } from "../contexts/CurrentTemperatureContext.js";
+import { CurrentUserContext } from "../contexts/CurrentUserContext.js";
 import "../blocks/App.css";
 import Api from "../utils/api.js";
 import Header from "./Header";
@@ -71,7 +72,6 @@ function App() {
       setAuthLoaded(true);
       return;
     }
-
     api
       .getCurrentUser(jwt)
       .then(({ username, email }) => {
@@ -164,17 +164,19 @@ function App() {
   const handleLogin = (values, resetLoginForm) => {
     if (!values) return;
 
-    authorize(values).then((data) => {
-      if (data.token) {
-        setToken(data.token);
-        setUserData(data.user);
-        setIsLoggedIn(true);
-        navigate(protectedDestination || "/");
-        setProtectedDestination("");
-        resetLoginForm();
-        closeActiveModal();
-      }
-    });
+    authorize(values)
+      .then((data) => {
+        if (data.token) {
+          setToken(data.token);
+          setUserData(data.user);
+          setIsLoggedIn(true);
+          navigate(protectedDestination || "/");
+          setProtectedDestination("");
+          resetLoginForm();
+          closeActiveModal();
+        }
+      })
+      .catch(console.error);
   };
 
   const handleSignout = () => {
@@ -196,9 +198,12 @@ function App() {
     }
   };
 
-  const contexts = {
+  const currentTempContext = {
     currentTempUnit,
     handleTempUnitToggle,
+  };
+
+  const currentUserContext = {
     isLoggedIn,
     authLoaded,
     protectedDestination,
@@ -208,76 +213,78 @@ function App() {
   return (
     <div className="page">
       <div className="page__content">
-        <AppContext.Provider value={contexts}>
-          <Header
-            date={currentDate}
-            weatherData={weatherData}
-            handleAddClick={handleAddClick}
-            handleRegisterClick={handleRegisterClick}
-            handleLoginClick={handleLoginClick}
-            isFahrenheit={currentTempUnit}
-            setIsFahrenheit={setCurrentTempUnit}
-          />
-          <Routes>
-            <Route
-              path="/"
-              element={
-                <Main
-                  weatherData={weatherData}
-                  handleCardClick={handleCardClick}
-                  clothingItems={clothingItems}
-                  weatherImages={weatherCardImages}
-                />
-              }
+        <CurrentTempContext.Provider value={currentTempContext}>
+          <CurrentUserContext.Provider value={currentUserContext}>
+            <Header
+              date={currentDate}
+              weatherData={weatherData}
+              handleAddClick={handleAddClick}
+              handleRegisterClick={handleRegisterClick}
+              handleLoginClick={handleLoginClick}
+              isFahrenheit={currentTempUnit}
+              setIsFahrenheit={setCurrentTempUnit}
             />
-            <Route
-              path="/profile"
-              element={
-                <ProtectedRoute>
-                  <Profile
+            <Routes>
+              <Route
+                path="/"
+                element={
+                  <Main
                     weatherData={weatherData}
                     handleCardClick={handleCardClick}
                     clothingItems={clothingItems}
-                    handleAddClick={handleAddClick}
-                    handleSignout={handleSignout}
+                    weatherImages={weatherCardImages}
                   />
-                </ProtectedRoute>
-              }
+                }
+              />
+              <Route
+                path="/profile"
+                element={
+                  <ProtectedRoute>
+                    <Profile
+                      weatherData={weatherData}
+                      handleCardClick={handleCardClick}
+                      clothingItems={clothingItems}
+                      handleAddClick={handleAddClick}
+                      handleSignout={handleSignout}
+                    />
+                  </ProtectedRoute>
+                }
+              />
+            </Routes>
+            <Footer />
+            <AddItemModal
+              isOpen={activeModal === "add-garment"}
+              onModalClose={closeActiveModal}
+              onAddItem={handleAddItem}
+              isLoading={isLoading}
             />
-          </Routes>
-          <Footer />
-          <AddItemModal
-            isOpen={activeModal === "add-garment"}
-            onModalClose={closeActiveModal}
-            onAddItem={handleAddItem}
-            isLoading={isLoading}
-          />
-          <RegisterModal
-            isOpen={activeModal === "register"}
-            handleLoginClick={handleLoginClick}
-            onModalClose={closeActiveModal}
-            isLoading={isLoading}
-            handleRegistration={handleRegistration}
-          />
-          <LoginModal
-            isOpen={activeModal === "login"}
-            handleRegisterClick={handleRegisterClick}
-            handleLogin={handleLogin}
-            onModalClose={closeActiveModal}
-            isLoading={isLoading}
-          />
-          <ItemModal
-            isOpen={activeModal === "preview"}
-            card={selectedCard}
-            onModalClose={closeActiveModal}
-            onDeleteClick={openConfirmDelete}
-          />
-          <DeleteConfirmModal
-            isOpen={activeModal === "delete"}
-            onModalClose={closeActiveModal}
-            onDeleteClick={handleDeleteItem}
-          />
-        </AppContext.Provider>
+            <RegisterModal
+              isOpen={activeModal === "register"}
+              handleLoginClick={handleLoginClick}
+              onModalClose={closeActiveModal}
+              isLoading={isLoading}
+              handleRegistration={handleRegistration}
+            />
+            <LoginModal
+              isOpen={activeModal === "login"}
+              handleRegisterClick={handleRegisterClick}
+              handleLogin={handleLogin}
+              onModalClose={closeActiveModal}
+              isLoading={isLoading}
+            />
+            <ItemModal
+              isOpen={activeModal === "preview"}
+              card={selectedCard}
+              onModalClose={closeActiveModal}
+              onDeleteClick={openConfirmDelete}
+            />
+            <DeleteConfirmModal
+              isOpen={activeModal === "delete"}
+              onModalClose={closeActiveModal}
+              onDeleteClick={handleDeleteItem}
+            />
+          </CurrentUserContext.Provider>
+        </CurrentTempContext.Provider>
       </div>
     </div>
   );

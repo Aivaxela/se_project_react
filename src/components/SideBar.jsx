@@ -12,14 +12,16 @@ function SideBar({ handleSignout }) {
         <img src={avatarImg} alt="avatar" className="sidebar__user-avatar" />
         <p className="sidebar__username">Riley Marcum </p>
       </div>
-      <button className="sidebar__button">Change profile data</button>
-      <button
-        onClick={() => signout()}
-        type="button"
-        className="sidebar__button"
-      >
-        Log out
-      </button>
+      <div className="sidebar__buttons-container">
+        <button className="sidebar__button">Change profile data</button>
+        <button
+          onClick={() => signout()}
+          type="button"
+          className="sidebar__button"
+        >
+          Log out
+        </button>
+      </div>
     </section>
   );
 }

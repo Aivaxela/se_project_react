@@ -5,6 +5,7 @@
 .clothes__heading-container {
   display: flex;
   padding-top: 16px;
+  margin-bottom: 16px;
 }
 
 .clothes__subheading {
