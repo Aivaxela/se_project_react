@@ -23,11 +23,22 @@ import {
   weatherCardImages,
 } from "../utils/constants.js";
 
-const api = new Api({
-  baseUrl: "http://localhost:3001",
-});
-
 function App() {
+  const [activeModal, setActiveModal] = useState("");
+  const [selectedCard, setSelectedCard] = useState({});
+  const [currentTempUnit, setCurrentTempUnit] = useState("F");
+  const [isLoading, setIsLoading] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [userData, setUserData] = useState({ username: "", email: "" });
+  const [protectedDestination, setProtectedDestination] = useState("");
+  const [authLoaded, setAuthLoaded] = useState(false);
+
+  const navigate = useNavigate();
+
+  const api = new Api({
+    baseUrl: "http://localhost:3001",
+  });
+
   const [weatherData, setWeatherData] = useState({
     city: "cityname",
     temp: { F: 999, C: 999 },
@@ -42,14 +53,6 @@ function App() {
       weather: "",
     },
   ]);
-  const [activeModal, setActiveModal] = useState("");
-  const [selectedCard, setSelectedCard] = useState({});
-  const [currentTempUnit, setCurrentTempUnit] = useState("F");
-  const [isLoading, setIsLoading] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [userData, setUserData] = useState({ username: "", email: "" });
-  const [protectedDestination, setProtectedDestination] = useState("");
-  const [authLoaded, setAuthLoaded] = useState(false);
 
   useEffect(() => {
     api
@@ -62,11 +65,33 @@ function App() {
         setWeatherData(filterData);
       })
       .catch((err) => alert(err));
+
+    const jwt = getToken();
+    if (!jwt) {
+      setAuthLoaded(true);
+      return;
+    }
+
+    api
+      .getCurrentUser(jwt)
+      .then(({ username, email }) => {
+        setIsLoggedIn(true);
+        setAuthLoaded(true);
+        setUserData({ username, email });
+      })
+      .catch(console.error);
   }, []);
 
   useEffect(() => {
     if (protectedDestination != "") setActiveModal("login");
   }, [protectedDestination]);
+
+  useEffect(() => {
+    if (!activeModal) return;
+    const handleEscClose = (e) => e.key === "Escape" && closeActiveModal();
+    document.addEventListener("keydown", handleEscClose);
+    return () => document.removeEventListener("keydown", handleEscClose);
+  }, [activeModal]);
 
   const handleAddItem = (newItem, resetCurrentForm) => {
     setIsLoading(true);
@@ -120,35 +145,9 @@ function App() {
     setActiveModal("");
   };
 
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    if (!activeModal) return;
-    const handleEscClose = (e) => e.key === "Escape" && closeActiveModal();
-    document.addEventListener("keydown", handleEscClose);
-    return () => document.removeEventListener("keydown", handleEscClose);
-  }, [activeModal]);
-
   const handleTempUnitToggle = () => {
     currentTempUnit === "F" ? setCurrentTempUnit("C") : setCurrentTempUnit("F");
   };
-
-  useEffect(() => {
-    const jwt = getToken();
-    if (!jwt) {
-      setAuthLoaded(true);
-      return;
-    }
-
-    api
-      .getCurrentUser(jwt)
-      .then(({ username, email }) => {
-        setIsLoggedIn(true);
-        setAuthLoaded(true);
-        setUserData({ username, email });
-      })
-      .catch(console.error);
-  }, []);
 
   const handleRegistration = (values) => {
     register(values)
