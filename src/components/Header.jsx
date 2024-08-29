@@ -61,7 +61,7 @@ function Header({
           <div className={"header__name-and-avatar"}>
             <p className="header__username">{userData.name}</p>
             <img
-              src={avatarImg}
+              src={userData.avatarUrl}
               alt="avatar"
               className={"header__avatar header__el_hovered"}
             />

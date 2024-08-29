@@ -30,7 +30,7 @@ function App() {
   const [currentTempUnit, setCurrentTempUnit] = useState("F");
   const [isLoading, setIsLoading] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [userData, setUserData] = useState({ name: "" });
+  const [userData, setUserData] = useState({ name: "", avatarUrl: "" });
   const [protectedDestination, setProtectedDestination] = useState("");
   const [authLoaded, setAuthLoaded] = useState(false);
 
@@ -77,7 +77,10 @@ function App() {
       .then((userData) => {
         setIsLoggedIn(true);
         setAuthLoaded(true);
-        setUserData({ name: userData.data.name });
+        setUserData({
+          name: userData.data.name,
+          avatarUrl: userData.data.avatarUrl,
+        });
       })
       .catch(console.error);
   }, []);
@@ -168,7 +171,7 @@ function App() {
       .then((data) => {
         if (data.token) {
           setToken(data.token);
-          setUserData({ name: data.name });
+          setUserData({ name: data.name, avatarUrl: data.avatarUrl });
           setIsLoggedIn(true);
           navigate(protectedDestination || "/");
           setProtectedDestination("");
@@ -183,7 +186,7 @@ function App() {
     removeToken();
     navigate("/");
     setIsLoggedIn(false);
-    setUserData({ name: "" });
+    setUserData({ name: "", avatarUrl: "" });
   };
 
   const assignId = () => {

@@ -39,7 +39,11 @@
 }
 
 .header__avatar {
-  padding-left: 12px;
+  margin-left: 12px;
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  object-fit: cover;
 }
 
 .header__logo {
