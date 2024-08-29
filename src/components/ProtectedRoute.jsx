@@ -11,6 +11,7 @@ export function ProtectedRoute({ children }) {
 
   useEffect(() => {
     if (!isLoggedIn && authLoaded) {
+      console.log("setting dest");
       setProtectedDestination(location.pathname);
       navigate("/");
     }

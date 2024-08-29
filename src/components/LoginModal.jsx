@@ -12,7 +12,7 @@ function LoginModal({
     useFormAndValidation();
 
   const handleSubmit = () => {
-    handleLogin(values);
+    handleLogin(values, resetCurrentForm);
   };
 
   const resetCurrentForm = () => {

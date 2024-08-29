@@ -149,16 +149,19 @@ function App() {
     currentTempUnit === "F" ? setCurrentTempUnit("C") : setCurrentTempUnit("F");
   };
 
-  const handleRegistration = (values) => {
+  const handleRegistration = (values, resetRegistrationForm) => {
+    if (!values) return;
+
     register(values)
       .then(() => {
-        //TODO: sign user in
+        setIsLoggedIn(true);
+        resetRegistrationForm();
         closeActiveModal();
       })
       .catch(console.error);
   };
 
-  const handleLogin = (values) => {
+  const handleLogin = (values, resetLoginForm) => {
     if (!values) return;
 
     authorize(values).then((data) => {
@@ -166,8 +169,10 @@ function App() {
         setToken(data.token);
         setUserData(data.user);
         setIsLoggedIn(true);
-        const redirectPath = location.state?.from?.pathname || "/";
-        navigate(redirectPath);
+        navigate(protectedDestination || "/");
+        setProtectedDestination("");
+        resetLoginForm();
+        closeActiveModal();
       }
     });
   };
@@ -195,7 +200,6 @@ function App() {
     currentTempUnit,
     handleTempUnitToggle,
     isLoggedIn,
-    setIsLoggedIn,
     authLoaded,
     protectedDestination,
     setProtectedDestination,

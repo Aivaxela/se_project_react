@@ -29,6 +29,10 @@
   cursor: pointer;
 }
 
+.header__el_hidden {
+  display: none;
+}
+
 .header__name-and-avatar {
   align-items: center;
   display: flex;

@@ -3,6 +3,8 @@ import headerLogo from "../assets/logo.svg";
 import avatarImg from "../assets/avatar.svg";
 import ToggleSwitch from "./ToggleSwitch";
 import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { AppContext } from "../contexts/AppContexts";
 
 function Header({
   date,
@@ -11,6 +13,8 @@ function Header({
   handleLoginClick,
   weatherData,
 }) {
+  const { isLoggedIn } = useContext(AppContext);
+
   return (
     <header className="header">
       <div className="header__group">
@@ -31,14 +35,18 @@ function Header({
           + Add clothes
         </button>
         <button
-          className="header__button header__el_hovered"
+          className={`header__button header__el_hovered ${
+            isLoggedIn ? "header__el_hidden" : ""
+          }`}
           type="button"
           onClick={handleRegisterClick}
         >
           Sign Up
         </button>
         <button
-          className="header__button header__el_hovered"
+          className={`header__button header__el_hovered ${
+            isLoggedIn ? "header__el_hidden" : ""
+          }`}
           type="button"
           onClick={handleLoginClick}
         >

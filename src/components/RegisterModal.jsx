@@ -12,7 +12,7 @@ function RegisterModal({
     useFormAndValidation();
 
   const handleSubmit = () => {
-    handleRegistration(values);
+    handleRegistration(values, resetCurrentForm);
   };
 
   const resetCurrentForm = () => {
