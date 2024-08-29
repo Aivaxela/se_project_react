@@ -1,22 +1,24 @@
-import { useContext } from "react";
-import { Navigate, useLocation } from "react-router-dom";
+import { useContext, useEffect } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import { AppContext } from "../contexts/AppContexts";
 
-export function ProtectedRoute({ children, anonymous = false }) {
-  const { isLoggedIn } = useContext(AppContext);
+export function ProtectedRoute({ children }) {
+  const { isLoggedIn, authLoaded, setProtectedDestination } =
+    useContext(AppContext);
 
   const location = useLocation();
-  const from = location.state?.from || "/";
+  const navigate = useNavigate();
 
-  if (anonymous && isLoggedIn) {
-    return <Navigate to={from} />;
-  }
+  useEffect(() => {
+    if (!isLoggedIn && authLoaded) {
+      setProtectedDestination(location.pathname);
+      navigate("/");
+    }
+  }, [authLoaded, isLoggedIn, location.pathname]);
 
-  if (!anonymous && !isLoggedIn) {
-    return <Navigate to="/login" state={{ from: location }} />;
-  }
-
-  return children;
+  if (!authLoaded) return null;
+  if (isLoggedIn) return children;
+  return null;
 }
 
 export default ProtectedRoute;

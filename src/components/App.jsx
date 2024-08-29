@@ -48,6 +48,8 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userData, setUserData] = useState({ username: "", email: "" });
+  const [protectedDestination, setProtectedDestination] = useState("");
+  const [authLoaded, setAuthLoaded] = useState(false);
 
   useEffect(() => {
     api
@@ -61,6 +63,10 @@ function App() {
       })
       .catch((err) => alert(err));
   }, []);
+
+  useEffect(() => {
+    if (protectedDestination != "") setActiveModal("login");
+  }, [protectedDestination]);
 
   const handleAddItem = (newItem, resetCurrentForm) => {
     setIsLoading(true);
@@ -129,12 +135,16 @@ function App() {
 
   useEffect(() => {
     const jwt = getToken();
-    if (!jwt) return;
+    if (!jwt) {
+      setAuthLoaded(true);
+      return;
+    }
 
     api
       .getCurrentUser(jwt)
       .then(({ username, email }) => {
         setIsLoggedIn(true);
+        setAuthLoaded(true);
         setUserData({ username, email });
       })
       .catch(console.error);
@@ -187,6 +197,9 @@ function App() {
     handleTempUnitToggle,
     isLoggedIn,
     setIsLoggedIn,
+    authLoaded,
+    protectedDestination,
+    setProtectedDestination,
   };
 
   return (

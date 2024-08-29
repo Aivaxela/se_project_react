@@ -13,7 +13,11 @@ function SideBar({ handleSignout }) {
         <p className="sidebar__username">Riley Marcum </p>
       </div>
       <button className="sidebar__button">Change profile data</button>
-      <button onClick={signout()} type="button" className="sidebar__button">
+      <button
+        onClick={() => signout()}
+        type="button"
+        className="sidebar__button"
+      >
         Log out
       </button>
     </section>
