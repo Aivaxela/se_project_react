@@ -56,10 +56,8 @@ function App() {
   ]);
 
   useEffect(() => {
-    api
-      .getClothingItems()
-      .then((res) => setClothingItems(res.data))
-      .catch((err) => alert(err));
+    getClothingItems();
+
     getWeather(coords, APIkey)
       .then((data) => {
         const filterData = filterWeatherData(data);
@@ -97,6 +95,13 @@ function App() {
     return () => document.removeEventListener("keydown", handleEscClose);
   }, [activeModal]);
 
+  const getClothingItems = () => {
+    api
+      .getClothingItems()
+      .then((res) => setClothingItems(res.data))
+      .catch((err) => alert(err));
+  };
+
   const handleAddItem = (newItem, resetCurrentForm) => {
     setIsLoading(true);
     newItem._id = assignId();
@@ -108,11 +113,14 @@ function App() {
         setClothingItems([res, ...clothingItems]);
         resetCurrentForm();
         closeActiveModal();
+        getClothingItems();
       })
       .catch((err) => alert(err))
-      .finally(() => setIsLoading(false));
+      .finally(() => {
+        setIsLoading(false);
+      });
   };
-  1;
+
   const handleDeleteItem = () => {
     const jwt = getToken();
     api
@@ -176,6 +184,7 @@ function App() {
         if (userData.token) {
           setToken(userData.token);
           setUserData({
+            id: userData.user._id,
             name: userData.user.name,
             avatarUrl: userData.user.avatarUrl,
           });
