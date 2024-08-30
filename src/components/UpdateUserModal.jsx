@@ -12,11 +12,12 @@ function UpdateUserModal({ isOpen, handleUpdateUser, isLoading }) {
     useFormAndValidation();
 
   useEffect(() => {
-    console.log(userData);
-
+    console.log("running");
     values.username = userData.name;
     values.avatarUrl = userData.avatarUrl;
   }, []);
+
+  console.log(values);
 
   return (
     <>
