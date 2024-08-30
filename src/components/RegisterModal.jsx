@@ -105,7 +105,6 @@ function RegisterModal({ isOpen, isLoading, handleRegistration }) {
             id="avatarUrl"
             name="avatarUrl"
             placeholder="Avatar Url"
-            required
             onChange={handleChange}
             value={values.avatarUrl || ""}
           />

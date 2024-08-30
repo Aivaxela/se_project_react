@@ -16,6 +16,21 @@ export default class Api {
     });
   };
 
+  updateCurrentUser = (newData, token) => {
+    return fetch(`${this._baseUrl}/users/me`, {
+      method: "PATCH",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        name: newData.name,
+        avatarUrl: newData.avatarUrl,
+      }),
+    }).then((res) => this._checkResponse(res));
+  };
+
   getClothingItems() {
     return fetch(`${this._baseUrl}/items`).then((res) =>
       this._checkResponse(res)

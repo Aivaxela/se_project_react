@@ -1,12 +1,14 @@
 import "../blocks/SideBar.css";
 import { useContext } from "react";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
+import { AppContext } from "../contexts/AppContext";
 
 function SideBar({ handleSignout }) {
   const { userData } = useContext(CurrentUserContext);
   const signout = () => {
     handleSignout();
   };
+  const { setActiveModal } = useContext(AppContext);
 
   return (
     <section className="sidebar">
@@ -29,7 +31,13 @@ function SideBar({ handleSignout }) {
         <p className="sidebar__username">{userData.name}</p>
       </div>
       <div className="sidebar__buttons-container">
-        <button className="sidebar__button">Change profile data</button>
+        <button
+          onClick={() => setActiveModal("update-user")}
+          type="button"
+          className="sidebar__button"
+        >
+          Change profile data
+        </button>
         <button
           onClick={() => signout()}
           type="button"

@@ -16,6 +16,7 @@ import AddItemModal from "./AddItemModal.jsx";
 import RegisterModal from "./RegisterModal.jsx";
 import LoginModal from "./LoginModal.jsx";
 import ItemModal from "./ItemModal.jsx";
+import UpdateUserModal from "./UpdateUserModal.jsx";
 import DeleteConfirmModal from "./DeleteConfirmModal.jsx";
 import ProtectedRoute from "./ProtectedRoute.jsx";
 import {
@@ -136,31 +137,6 @@ function App() {
       .catch((err) => alert(err));
   };
 
-  // const handleCardClick = (card) => {
-  //   // setActiveModal("preview");
-  //   setSelectedCard(card);
-  // };
-
-  // const handleAddClick = () => {
-  //   setActiveModal("add-garment");
-  // };
-
-  // const handleRegisterClick = () => {
-  //   setActiveModal("register");
-  // };
-
-  // const handleLoginClick = () => {
-  //   setActiveModal("login");
-  // };
-
-  // const openConfirmDelete = () => {
-  //   setActiveModal("delete");
-  // };
-
-  // const closeActiveModal = () => {
-  //   setActiveModal("");
-  // };
-
   const handleTempUnitToggle = () => {
     currentTempUnit === "F" ? setCurrentTempUnit("C") : setCurrentTempUnit("F");
   };
@@ -197,6 +173,12 @@ function App() {
         }
       })
       .catch(console.error);
+  };
+
+  const handleUpdateUser = () => {
+    const jwt = getToken();
+
+    api.updateCurrentUser(userData, jwt);
   };
 
   const handleSignout = () => {
@@ -298,11 +280,11 @@ function App() {
                 isOpen={activeModal === "preview"}
                 card={selectedCard}
               />
-              {/* <UpdateUserModal
+              <UpdateUserModal
                 isOpen={activeModal === "update-user"}
                 handleUpdateUser={handleUpdateUser}
                 isLoading={isLoading}
-              /> */}
+              />
               <DeleteConfirmModal
                 isOpen={activeModal === "delete"}
                 onDeleteClick={handleDeleteItem}

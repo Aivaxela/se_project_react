@@ -1,0 +1,78 @@
+import ModalWithForm from "./ModalWithForm";
+import { useFormAndValidation } from "../utils/useFormAndValidation";
+import { useContext, useEffect } from "react";
+import { CurrentUserContext } from "../contexts/CurrentUserContext";
+import { AppContext } from "../contexts/AppContext";
+
+function UpdateUserModal({ isOpen, handleUpdateUser, isLoading }) {
+  const { userData } = useContext(CurrentUserContext);
+  const { activeModal } = useContext(AppContext);
+
+  const { values, handleChange, errors, isValid, resetForm, setValues } =
+    useFormAndValidation();
+
+  useEffect(() => {
+    console.log(userData);
+
+    values.username = userData.name;
+    values.avatarUrl = userData.avatarUrl;
+  }, []);
+
+  return (
+    <>
+      <ModalWithForm
+        title={"Change profile data"}
+        buttonText={isLoading ? "Saving..." : "Save changes"}
+        isOpen={isOpen}
+        onSubmit={handleUpdateUser}
+        formValid={isValid}
+      >
+        <label htmlFor="name-update" className="modal__label">
+          Name*
+          <input
+            type="text"
+            className="modal__input"
+            id="name-update"
+            name="username"
+            placeholder="Name"
+            minLength="4"
+            maxLength="64"
+            required
+            onChange={handleChange}
+            value={values.username || ""}
+          />
+          <span
+            className={`modal__input-error ${
+              errors.email ? "modal__input-error_visible" : ""
+            }`}
+            id="name-error"
+          >
+            {errors.email}
+          </span>
+        </label>
+        <label htmlFor="avatarUrl-update" className="modal__label">
+          Avatar URL
+          <input
+            type="url"
+            className="modal__input"
+            id="avatarUrl-update"
+            name="avatarUrl"
+            placeholder="Avatar Url"
+            onChange={handleChange}
+            value={values.avatarUrl || ""}
+          />
+          <span
+            className={`modal__input-error ${
+              errors.avatarUrl ? "modal__input-error_visible" : ""
+            }`}
+            id="avatarUrl-error"
+          >
+            {errors.avatarUrl}
+          </span>
+        </label>
+      </ModalWithForm>
+    </>
+  );
+}
+
+export default UpdateUserModal;
