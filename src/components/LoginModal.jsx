@@ -1,13 +1,11 @@
 import ModalWithForm from "./ModalWithForm";
 import { useFormAndValidation } from "../utils/useFormAndValidation";
+import { useContext } from "react";
+import { AppContext } from "../contexts/AppContext";
 
-function LoginModal({
-  isOpen,
-  handleRegisterClick,
-  handleLogin,
-  onModalClose,
-  isLoading,
-}) {
+function LoginModal({ isOpen, handleLogin, isLoading }) {
+  const { setActiveModal } = useContext(AppContext);
+
   const { values, handleChange, errors, isValid, resetForm, setValues } =
     useFormAndValidation();
 
@@ -25,9 +23,8 @@ function LoginModal({
         title="Log in"
         buttonText={isLoading ? "Logging in" : "Login"}
         altButtonText={"or Register"}
-        altButtonClick={handleRegisterClick}
+        altButtonClick={() => setActiveModal("register")}
         isOpen={isOpen}
-        onModalClose={onModalClose}
         onSubmit={handleSubmit}
         formValid={isValid}
       >

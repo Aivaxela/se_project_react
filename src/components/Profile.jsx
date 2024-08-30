@@ -2,18 +2,12 @@ import "../blocks/Profile.css";
 import SideBar from "./SideBar";
 import ClothesSection from "./ClothesSection";
 
-function Profile({
-  handleCardClick,
-  clothingItems,
-  handleAddClick,
-  handleSignout,
-}) {
+function Profile({ setSelectedCard, clothingItems, handleSignout }) {
   return (
     <section className="profile">
       <SideBar handleSignout={handleSignout} />
       <ClothesSection
-        handleCardClick={handleCardClick}
-        handleAddClick={handleAddClick}
+        setSelectedCard={setSelectedCard}
         clothingItems={clothingItems}
       />
     </section>

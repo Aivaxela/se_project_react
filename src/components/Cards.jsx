@@ -5,7 +5,7 @@ import { useLocation } from "react-router-dom";
 
 function Cards({
   clothingItems,
-  onCardClick,
+  setSelectedCard,
   isTempFiltered = false, //optional
   weatherData = {}, //optional
 }) {
@@ -26,7 +26,11 @@ function Cards({
         {usersCards.map((item) => {
           if (!item._id) return;
           return (
-            <ItemCard key={item._id} item={item} onCardClick={onCardClick} />
+            <ItemCard
+              key={item._id}
+              item={item}
+              setSelectedCard={setSelectedCard}
+            />
           );
         })}
       </ul>
@@ -37,7 +41,11 @@ function Cards({
         {filteredCards.map((item) => {
           if (!item._id) return;
           return (
-            <ItemCard key={item._id} item={item} onCardClick={onCardClick} />
+            <ItemCard
+              key={item._id}
+              item={item}
+              setSelectedCard={setSelectedCard}
+            />
           );
         })}
       </ul>

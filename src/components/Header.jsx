@@ -4,15 +4,11 @@ import ToggleSwitch from "./ToggleSwitch";
 import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
+import { AppContext } from "../contexts/AppContext";
 
-function Header({
-  date,
-  handleAddClick,
-  handleRegisterClick,
-  handleLoginClick,
-  weatherData,
-}) {
+function Header({ date, weatherData }) {
   const { isLoggedIn, userData } = useContext(CurrentUserContext);
+  const { setActiveModal } = useContext(AppContext);
 
   return (
     <header className="header">
@@ -31,7 +27,7 @@ function Header({
             !isLoggedIn ? "header__el_hidden" : ""
           }`}
           type="button"
-          onClick={handleAddClick}
+          onClick={() => setActiveModal("add-garment")}
         >
           + Add clothes
         </button>
@@ -40,7 +36,7 @@ function Header({
             isLoggedIn ? "header__el_hidden" : ""
           }`}
           type="button"
-          onClick={handleRegisterClick}
+          onClick={() => setActiveModal("register")}
         >
           Sign Up
         </button>
@@ -49,7 +45,7 @@ function Header({
             isLoggedIn ? "header__el_hidden" : ""
           }`}
           type="button"
-          onClick={handleLoginClick}
+          onClick={() => setActiveModal("login")}
         >
           Log in
         </button>

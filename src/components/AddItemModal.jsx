@@ -2,7 +2,7 @@ import ModalWithForm from "./ModalWithForm";
 import { useFormAndValidation } from "../utils/useFormAndValidation";
 import { useEffect } from "react";
 
-function AddItemModal({ isOpen, onModalClose, onAddItem, isLoading }) {
+function AddItemModal({ isOpen, onAddItem, isLoading }) {
   const { values, handleChange, errors, isValid, resetForm, setValues } =
     useFormAndValidation();
 
@@ -16,7 +16,6 @@ function AddItemModal({ isOpen, onModalClose, onAddItem, isLoading }) {
       title="New garment"
       buttonText={isLoading ? "Saving..." : "Add garment"}
       isOpen={isOpen}
-      onModalClose={onModalClose}
       onSubmit={() => {
         const newItem = {
           _id: null,

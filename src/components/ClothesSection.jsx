@@ -1,16 +1,23 @@
+import { useContext } from "react";
 import "../blocks/Clothes.css";
 import Cards from "./Cards";
+import { AppContext } from "../contexts/AppContext";
 
-function ClothesSection({ handleCardClick, handleAddClick, clothingItems }) {
+function ClothesSection({ setSelectedCard, clothingItems }) {
+  const { setActiveModal } = useContext(AppContext);
+
   return (
     <section className="clothes">
       <div className="clothes__heading-container">
         <p className="clothes__subheading">Your items</p>
-        <p className="clothes__add-btn" onClick={handleAddClick}>
+        <p
+          className="clothes__add-btn"
+          onClick={() => setActiveModal("add-garment")}
+        >
           + Add new
         </p>
       </div>
-      <Cards clothingItems={clothingItems} onCardClick={handleCardClick} />
+      <Cards clothingItems={clothingItems} setSelectedCard={setSelectedCard} />
     </section>
   );
 }

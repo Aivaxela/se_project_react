@@ -2,14 +2,20 @@ import "../blocks/Modal.css";
 import close from "../assets/close.svg";
 import { useContext } from "react";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
+import { AppContext } from "../contexts/AppContext";
 
-function ItemModal({ card, onModalClose, isOpen, onDeleteClick }) {
+function ItemModal({ card, isOpen }) {
   const { userData } = useContext(CurrentUserContext);
+  const { setActiveModal } = useContext(AppContext);
 
   return (
     <div className={`modal ${isOpen ? "modal_opened" : ""}`}>
       <div className="modal__container modal__container-preview">
-        <button className="modal__close" type="button" onClick={onModalClose}>
+        <button
+          className="modal__close"
+          type="button"
+          onClick={() => setActiveModal("")}
+        >
           <img src={close} alt="close button" className="modal__close-icon" />
         </button>
         <div className="modal__preview">
@@ -27,7 +33,7 @@ function ItemModal({ card, onModalClose, isOpen, onDeleteClick }) {
               className={`modal__card-delete modal__el_hovered ${
                 card.owner?._id === userData.id ? "" : "modal__el_hidden"
               }`}
-              onClick={onDeleteClick}
+              onClick={() => setActiveModal("delete")}
             >
               Delete item
             </p>
