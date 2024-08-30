@@ -79,6 +79,10 @@
   color: #ff4d00;
 }
 
+.modal__el_hidden {
+  display: none;
+}
+
 .modal__confirm-delete-text {
   padding-bottom: 24px;
   color: #ff4d00;

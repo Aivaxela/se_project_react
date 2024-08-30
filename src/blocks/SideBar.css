@@ -5,10 +5,10 @@
 .sidebar__user-container {
   margin-bottom: 20px;
   display: flex;
-  gap: 20px;
+  gap: 12px;
 }
 
-.sidebar__user-avatar {
+.sidebar__avatar {
   height: 56px;
   width: 56px;
   border-radius: 50%;
@@ -17,8 +17,30 @@
   border-color: rgba(0, 0, 0, 0.5);
 }
 
+.sidebar__avatar-null {
+  min-height: 56px;
+  min-width: 56px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1px solid;
+  border-color: rgba(0, 0, 0, 0.5);
+  position: relative;
+}
+
+.sidebar__avatar-null-text {
+  font-size: 24px;
+  position: absolute;
+  top: -8px;
+  left: 20px;
+}
+
+.sidebar__el_hidden {
+  display: none;
+}
+
 .sidebar__username {
   overflow-wrap: break-word;
+  align-self: center;
 }
 
 .sidebar__buttons-container {

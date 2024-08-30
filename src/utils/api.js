@@ -22,7 +22,7 @@ export default class Api {
     );
   }
 
-  addClothingItem(item) {
+  addClothingItem(item, token) {
     return fetch(`${this._baseUrl}/items`, {
       method: "POST",
       headers: {
@@ -38,7 +38,7 @@ export default class Api {
     }).then((res) => this._checkResponse(res));
   }
 
-  deleteClothingItem(itemId) {
+  deleteClothingItem(itemId, token) {
     return fetch(`${this._baseUrl}/items/${itemId}`, {
       method: "DELETE",
       headers: {

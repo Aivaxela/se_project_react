@@ -1,7 +1,11 @@
 import "../blocks/Modal.css";
 import close from "../assets/close.svg";
+import { useContext } from "react";
+import { CurrentUserContext } from "../contexts/CurrentUserContext";
 
 function ItemModal({ card, onModalClose, isOpen, onDeleteClick }) {
+  const { userData } = useContext(CurrentUserContext);
+
   return (
     <div className={`modal ${isOpen ? "modal_opened" : ""}`}>
       <div className="modal__container modal__container-preview">
@@ -20,7 +24,9 @@ function ItemModal({ card, onModalClose, isOpen, onDeleteClick }) {
               <p className="modal__subtext">Weather: {card.weather}</p>
             </div>
             <p
-              className="modal__card-delete modal__el_hovered"
+              className={`modal__card-delete modal__el_hovered ${
+                card.owner?._id === userData.id ? "" : "modal__el_hidden"
+              }`}
               onClick={onDeleteClick}
             >
               Delete item

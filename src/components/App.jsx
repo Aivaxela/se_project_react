@@ -30,7 +30,7 @@ function App() {
   const [currentTempUnit, setCurrentTempUnit] = useState("F");
   const [isLoading, setIsLoading] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [userData, setUserData] = useState({ name: "", avatarUrl: "" });
+  const [userData, setUserData] = useState({ id: "", name: "", avatarUrl: "" });
   const [protectedDestination, setProtectedDestination] = useState("");
   const [authLoaded, setAuthLoaded] = useState(false);
 
@@ -78,6 +78,7 @@ function App() {
         setIsLoggedIn(true);
         setAuthLoaded(true);
         setUserData({
+          id: userData.data._id,
           name: userData.data.name,
           avatarUrl: userData.data.avatarUrl,
         });
@@ -99,8 +100,10 @@ function App() {
   const handleAddItem = (newItem, resetCurrentForm) => {
     setIsLoading(true);
     newItem._id = assignId();
+    const jwt = getToken();
+
     api
-      .addClothingItem(newItem)
+      .addClothingItem(newItem, jwt)
       .then((res) => {
         setClothingItems([res, ...clothingItems]);
         resetCurrentForm();
@@ -109,10 +112,11 @@ function App() {
       .catch((err) => alert(err))
       .finally(() => setIsLoading(false));
   };
-
+  1;
   const handleDeleteItem = () => {
+    const jwt = getToken();
     api
-      .deleteClothingItem(selectedCard._id)
+      .deleteClothingItem(selectedCard._id, jwt)
       .then(() => {
         const updatedArr = clothingItems.filter(
           (item) => item._id !== selectedCard._id
@@ -168,10 +172,13 @@ function App() {
     if (!values) return;
 
     authorize(values)
-      .then((data) => {
-        if (data.token) {
-          setToken(data.token);
-          setUserData({ name: data.name, avatarUrl: data.avatarUrl });
+      .then((userData) => {
+        if (userData.token) {
+          setToken(userData.token);
+          setUserData({
+            name: userData.user.name,
+            avatarUrl: userData.user.avatarUrl,
+          });
           setIsLoggedIn(true);
           navigate(protectedDestination || "/");
           setProtectedDestination("");
@@ -186,7 +193,7 @@ function App() {
     removeToken();
     navigate("/");
     setIsLoggedIn(false);
-    setUserData({ name: "", avatarUrl: "" });
+    clearUserData();
   };
 
   const assignId = () => {
@@ -200,6 +207,10 @@ function App() {
         return toCheck;
       }
     }
+  };
+
+  const clearUserData = () => {
+    setUserData({ id: "", name: "", avatarUrl: "" });
   };
 
   const currentTempContext = {

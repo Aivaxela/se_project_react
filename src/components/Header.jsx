@@ -27,7 +27,9 @@ function Header({
       <div className="header__group">
         <ToggleSwitch />
         <button
-          className="header__button header__el_hovered"
+          className={`header__button header__el_hovered ${
+            !isLoggedIn ? "header__el_hidden" : ""
+          }`}
           type="button"
           onClick={handleAddClick}
         >
@@ -62,8 +64,18 @@ function Header({
             <img
               src={userData.avatarUrl}
               alt="avatar"
-              className={"header__avatar header__el_hovered"}
+              className={`header__avatar header__el_hovered ${
+                !userData.avatarUrl ? "header__el_hidden" : ""
+              }`}
             />
+            <div
+              alt="no avatar"
+              className={`header__avatar-null header__el_hovered ${
+                userData.avatarUrl ? "header__el_hidden" : ""
+              }`}
+            >
+              <p className="header__avatar-null-text">{userData.name[0]}</p>
+            </div>
           </div>
         </Link>
       </div>
