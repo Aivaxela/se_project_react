@@ -4,7 +4,13 @@ import WeatherCard from "./WeatherCard";
 import Cards from "./Cards";
 import { CurrentTempContext } from "../contexts/CurrentTemperatureContext";
 
-function Main({ weatherData, setSelectedCard, weatherImages, clothingItems }) {
+function Main({
+  weatherData,
+  setSelectedCard,
+  weatherImages,
+  clothingItems,
+  onCardLike,
+}) {
   const { currentTempUnit } = useContext(CurrentTempContext);
 
   return (
@@ -20,6 +26,7 @@ function Main({ weatherData, setSelectedCard, weatherImages, clothingItems }) {
         setSelectedCard={setSelectedCard}
         isTempFiltered={true}
         weatherData={weatherData}
+        handleCardLike={onCardLike}
       />
     </main>
   );

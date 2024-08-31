@@ -63,6 +63,26 @@ export default class Api {
     }).then((res) => this._checkResponse(res));
   }
 
+  addCardLike(cardId, token) {
+    return fetch(`${this._baseUrl}/items/${cardId}/likes`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    }).then((res) => this._checkResponse(res));
+  }
+
+  deleteCardLike(cardId, token) {
+    return fetch(`${this._baseUrl}/items/${cardId}/likes`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    }).then((res) => this._checkResponse(res));
+  }
+
   _checkResponse(res) {
     if (res.ok) {
       return res.json();

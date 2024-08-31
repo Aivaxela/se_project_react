@@ -6,6 +6,7 @@ import { useLocation } from "react-router-dom";
 function Cards({
   clothingItems,
   setSelectedCard,
+  handleCardLike,
   isTempFiltered = false, //optional
   weatherData = {}, //optional
 }) {
@@ -30,6 +31,7 @@ function Cards({
               key={item._id}
               item={item}
               setSelectedCard={setSelectedCard}
+              handleCardLike={handleCardLike}
             />
           );
         })}
@@ -45,6 +47,7 @@ function Cards({
               key={item._id}
               item={item}
               setSelectedCard={setSelectedCard}
+              handleCardLike={handleCardLike}
             />
           );
         })}

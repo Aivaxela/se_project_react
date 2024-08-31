@@ -196,6 +196,28 @@ function App() {
       .catch(console.error);
   };
 
+  const handleCardLike = ({ id, isLiked }) => {
+    const jwt = getToken();
+
+    !isLiked
+      ? api
+          .addCardLike(id, jwt)
+          .then((updatedCard) => {
+            setClothingItems((cards) =>
+              cards.map((item) => (item._id === id ? updatedCard : item))
+            );
+          })
+          .catch((err) => console.log(err))
+      : api
+          .removeCardLike(id, jwt)
+          .then((updatedCard) => {
+            setClothingItems((cards) =>
+              cards.map((item) => (item._id === id ? updatedCard : item))
+            );
+          })
+          .catch((err) => console.log(err));
+  };
+
   const handleSignout = () => {
     removeToken();
     navigate("/");
@@ -245,6 +267,7 @@ function App() {
                       setSelectedCard={setSelectedCard}
                       clothingItems={clothingItems}
                       weatherImages={weatherCardImages}
+                      onCardLike={handleCardLike}
                     />
                   }
                 />
@@ -257,6 +280,7 @@ function App() {
                         setSelectedCard={setSelectedCard}
                         clothingItems={clothingItems}
                         handleSignout={handleSignout}
+                        onCardLike={handleCardLike}
                       />
                     </ProtectedRoute>
                   }

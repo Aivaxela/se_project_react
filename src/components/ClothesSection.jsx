@@ -3,7 +3,7 @@ import "../blocks/Clothes.css";
 import Cards from "./Cards";
 import { AppContext } from "../contexts/AppContext";
 
-function ClothesSection({ setSelectedCard, clothingItems }) {
+function ClothesSection({ setSelectedCard, clothingItems, handleCardLike }) {
   const { setActiveModal } = useContext(AppContext);
 
   return (
@@ -17,7 +17,11 @@ function ClothesSection({ setSelectedCard, clothingItems }) {
           + Add new
         </p>
       </div>
-      <Cards clothingItems={clothingItems} setSelectedCard={setSelectedCard} />
+      <Cards
+        clothingItems={clothingItems}
+        setSelectedCard={setSelectedCard}
+        handleCardLike={handleCardLike}
+      />
     </section>
   );
 }

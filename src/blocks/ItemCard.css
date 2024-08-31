@@ -7,6 +7,8 @@
 .card__text-container {
   position: absolute;
   padding-top: 12px;
+  display: flex;
+  gap: 12px;
 }
 
 .card__text {
@@ -15,6 +17,14 @@
   border-radius: 4px;
   color: rgba(0, 0, 0, 0.6);
   background-color: #fff;
+}
+
+.card__like {
+  align-self: center;
+}
+
+.card__like:hover {
+  cursor: pointer;
 }
 
 .card__image {
