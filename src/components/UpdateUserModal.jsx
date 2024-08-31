@@ -11,14 +11,6 @@ function UpdateUserModal({ isOpen, handleUpdateUser, isLoading }) {
   const { values, handleChange, errors, isValid, resetForm, setValues } =
     useFormAndValidation();
 
-  useEffect(() => {
-    console.log("running");
-    values.username = userData.name;
-    values.avatarUrl = userData.avatarUrl;
-  }, []);
-
-  console.log(values);
-
   return (
     <>
       <ModalWithForm
@@ -40,7 +32,7 @@ function UpdateUserModal({ isOpen, handleUpdateUser, isLoading }) {
             maxLength="64"
             required
             onChange={handleChange}
-            value={values.username || ""}
+            value={values.username || userData.name || ""}
           />
           <span
             className={`modal__input-error ${
@@ -60,7 +52,7 @@ function UpdateUserModal({ isOpen, handleUpdateUser, isLoading }) {
             name="avatarUrl"
             placeholder="Avatar Url"
             onChange={handleChange}
-            value={values.avatarUrl || ""}
+            value={values.avatarUrl || userData.avatarUrl || ""}
           />
           <span
             className={`modal__input-error ${

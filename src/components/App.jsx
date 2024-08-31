@@ -161,15 +161,15 @@ function App() {
         if (userData.token) {
           setToken(userData.token);
           setUserData({
-            id: userData.user._id,
-            name: userData.user.name,
-            avatarUrl: userData.user.avatarUrl,
+            id: userData.id,
+            name: userData.name,
+            avatarUrl: userData?.avatarUrl,
           });
           setIsLoggedIn(true);
           navigate(protectedDestination || "/");
-          setProtectedDestination("");
           resetLoginForm();
           setActiveModal("");
+          setProtectedDestination("");
         }
       })
       .catch(console.error);
