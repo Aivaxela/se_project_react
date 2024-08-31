@@ -145,10 +145,11 @@ function App() {
     if (!values) return;
 
     register(values)
-      .then(() => {
-        setIsLoggedIn(true);
-        resetRegistrationForm();
-        setActiveModal("");
+      .then((userData) => {
+        if (userData.token) {
+          loginProcesses(userData);
+          resetRegistrationForm();
+        }
       })
       .catch(console.error);
   };
@@ -159,26 +160,38 @@ function App() {
     authorize(values)
       .then((userData) => {
         if (userData.token) {
-          setToken(userData.token);
-          setUserData({
-            id: userData.id,
-            name: userData.name,
-            avatarUrl: userData?.avatarUrl,
-          });
-          setIsLoggedIn(true);
-          navigate(protectedDestination || "/");
+          loginProcesses(userData);
           resetLoginForm();
-          setActiveModal("");
-          setProtectedDestination("");
         }
       })
       .catch(console.error);
   };
 
-  const handleUpdateUser = () => {
-    const jwt = getToken();
+  const loginProcesses = (userData) => {
+    setToken(userData.token);
+    setUserData({
+      id: userData.id,
+      name: userData.name,
+      avatarUrl: userData?.avatarUrl,
+    });
+    setIsLoggedIn(true);
+    navigate(protectedDestination || "/");
+    setActiveModal("");
+    setProtectedDestination("");
+  };
 
-    api.updateCurrentUser(userData, jwt);
+  const handleUpdateUser = (values, resetUpdateUserForm) => {
+    const jwt = getToken();
+    api.updateCurrentUser(values, jwt);
+    resetUpdateUserForm();
+    setActiveModal("");
+    api.getCurrentUser(jwt).then((userData) => {
+      setUserData({
+        id: userData.data._id,
+        name: userData.data.name,
+        avatarUrl: userData.data.avatarUrl,
+      });
+    });
   };
 
   const handleSignout = () => {

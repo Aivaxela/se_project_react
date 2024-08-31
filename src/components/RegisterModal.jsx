@@ -6,7 +6,7 @@ import { AppContext } from "../contexts/AppContext";
 function RegisterModal({ isOpen, isLoading, handleRegistration }) {
   const { setActiveModal } = useContext(AppContext);
 
-  const { values, handleChange, errors, isValid, resetForm, setValues } =
+  const { values, handleChange, errors, isValid, resetForm } =
     useFormAndValidation();
 
   const handleSubmit = () => {
@@ -29,7 +29,7 @@ function RegisterModal({ isOpen, isLoading, handleRegistration }) {
         formValid={isValid}
       >
         <label htmlFor="email-signup" className="modal__label">
-          Email
+          Email*
           <input
             type="email"
             className="modal__input"
@@ -52,7 +52,7 @@ function RegisterModal({ isOpen, isLoading, handleRegistration }) {
           </span>
         </label>
         <label htmlFor="password-signup" className="modal__label">
-          Password
+          Password*
           <input
             type="password"
             className="modal__input"
@@ -75,7 +75,7 @@ function RegisterModal({ isOpen, isLoading, handleRegistration }) {
           </span>
         </label>
         <label htmlFor="name-signup" className="modal__label">
-          Name
+          Name*
           <input
             type="text"
             className="modal__input"

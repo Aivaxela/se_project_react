@@ -1,15 +1,24 @@
 import ModalWithForm from "./ModalWithForm";
 import { useFormAndValidation } from "../utils/useFormAndValidation";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
-import { AppContext } from "../contexts/AppContext";
 
 function UpdateUserModal({ isOpen, handleUpdateUser, isLoading }) {
   const { userData } = useContext(CurrentUserContext);
-  const { activeModal } = useContext(AppContext);
-
   const { values, handleChange, errors, isValid, resetForm, setValues } =
     useFormAndValidation();
+
+  useEffect(() => {
+    setValues({ username: userData.name, avatarUrl: userData.avatarUrl });
+  }, [isOpen]);
+
+  const handleSubmit = () => {
+    handleUpdateUser(values, resetCurrentForm);
+  };
+
+  const resetCurrentForm = () => {
+    resetForm({ username: "", avatarUrl: "" });
+  };
 
   return (
     <>
@@ -17,7 +26,7 @@ function UpdateUserModal({ isOpen, handleUpdateUser, isLoading }) {
         title={"Change profile data"}
         buttonText={isLoading ? "Saving..." : "Save changes"}
         isOpen={isOpen}
-        onSubmit={handleUpdateUser}
+        onSubmit={handleSubmit}
         formValid={isValid}
       >
         <label htmlFor="name-update" className="modal__label">
@@ -32,15 +41,15 @@ function UpdateUserModal({ isOpen, handleUpdateUser, isLoading }) {
             maxLength="64"
             required
             onChange={handleChange}
-            value={values.username || userData.name || ""}
+            value={values.username || ""}
           />
           <span
             className={`modal__input-error ${
-              errors.email ? "modal__input-error_visible" : ""
+              errors.username ? "modal__input-error_visible" : ""
             }`}
             id="name-error"
           >
-            {errors.email}
+            {errors.username}
           </span>
         </label>
         <label htmlFor="avatarUrl-update" className="modal__label">
@@ -52,7 +61,7 @@ function UpdateUserModal({ isOpen, handleUpdateUser, isLoading }) {
             name="avatarUrl"
             placeholder="Avatar Url"
             onChange={handleChange}
-            value={values.avatarUrl || userData.avatarUrl || ""}
+            value={values.avatarUrl || ""}
           />
           <span
             className={`modal__input-error ${

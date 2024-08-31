@@ -25,7 +25,7 @@ export default class Api {
         Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify({
-        name: newData.name,
+        name: newData.username,
         avatarUrl: newData.avatarUrl,
       }),
     }).then((res) => this._checkResponse(res));
