@@ -18,7 +18,7 @@ import LoginModal from "./LoginModal.jsx";
 import ItemModal from "./ItemModal.jsx";
 import UpdateUserModal from "./UpdateUserModal.jsx";
 import DeleteConfirmModal from "./DeleteConfirmModal.jsx";
-import ProtectedRoute from "./ProtectedRoute.jsx";
+import ProtectedRoute from "../utils/ProtectedRoute.js";
 import {
   currentDate,
   APIkey,
