@@ -9,7 +9,7 @@ function AddItemModal({ isOpen, onAddItem, isLoading }) {
   const resetCurrentForm = () => {
     resetForm({ name: "", imageUrl: "", weather: "" });
   };
-  useEffect(() => setValues({ weather: "hot" }), []);
+  useEffect(() => setValues({ weather: "hot" }), [setValues]);
 
   return (
     <ModalWithForm

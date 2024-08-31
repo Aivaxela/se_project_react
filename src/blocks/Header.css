@@ -14,7 +14,6 @@
 .header__profile-link {
   text-decoration: none;
   color: black;
-  min-width: 170px;
 }
 
 .header__button {
@@ -41,8 +40,10 @@
 
 .header__avatar {
   margin-left: 12px;
-  height: 40px;
-  width: 40px;
+  min-height: 40px;
+  min-width: 40px;
+  max-height: 40px;
+  max-width: 40px;
   border-radius: 50%;
   object-fit: cover;
   border: 1px solid;
@@ -73,6 +74,7 @@
 .header__username {
   margin: 0;
   padding: 0;
+  text-align: end;
 }
 
 @media screen and (max-width: 600px) {

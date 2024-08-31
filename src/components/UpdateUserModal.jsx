@@ -1,6 +1,6 @@
 import ModalWithForm from "./ModalWithForm";
 import { useFormAndValidation } from "../utils/useFormAndValidation";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 
 function UpdateUserModal({ isOpen, handleUpdateUser, isLoading }) {
@@ -10,7 +10,7 @@ function UpdateUserModal({ isOpen, handleUpdateUser, isLoading }) {
 
   useEffect(() => {
     setValues({ username: userData.name, avatarUrl: userData.avatarUrl });
-  }, [isOpen]);
+  }, [isOpen, setValues, userData]);
 
   const handleSubmit = () => {
     handleUpdateUser(values, resetCurrentForm);

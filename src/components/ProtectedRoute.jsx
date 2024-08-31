@@ -14,7 +14,13 @@ export function ProtectedRoute({ children }) {
       setProtectedDestination(location.pathname);
       navigate("/");
     }
-  }, [authLoaded, isLoggedIn, location.pathname]);
+  }, [
+    authLoaded,
+    isLoggedIn,
+    location.pathname,
+    navigate,
+    setProtectedDestination,
+  ]);
 
   if (!authLoaded) return null;
   if (isLoggedIn) return children;
