@@ -35,9 +35,6 @@ function App() {
   const [userData, setUserData] = useState({ id: "", name: "", avatarUrl: "" });
   const [protectedDestination, setProtectedDestination] = useState("");
   const [authLoaded, setAuthLoaded] = useState(false);
-
-  const navigate = useNavigate();
-
   const api = new Api({
     baseUrl: "http://localhost:3001",
   });
@@ -56,6 +53,8 @@ function App() {
       weather: "",
     },
   ]);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     getClothingItems();
