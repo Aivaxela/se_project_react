@@ -198,21 +198,20 @@ function App() {
 
   const handleCardLike = ({ id, isLiked }) => {
     const jwt = getToken();
-
     !isLiked
       ? api
           .addCardLike(id, jwt)
           .then((updatedCard) => {
             setClothingItems((cards) =>
-              cards.map((item) => (item._id === id ? updatedCard : item))
+              cards.map((item) => (item._id === id ? updatedCard.data : item))
             );
           })
           .catch((err) => console.log(err))
       : api
-          .removeCardLike(id, jwt)
+          .deleteCardLike(id, jwt)
           .then((updatedCard) => {
             setClothingItems((cards) =>
-              cards.map((item) => (item._id === id ? updatedCard : item))
+              cards.map((item) => (item._id === id ? updatedCard.data : item))
             );
           })
           .catch((err) => console.log(err));

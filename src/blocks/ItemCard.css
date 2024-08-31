@@ -27,6 +27,10 @@
   cursor: pointer;
 }
 
+.card__like_hidden {
+  display: none;
+}
+
 .card__image {
   width: 325px;
   height: 328px;

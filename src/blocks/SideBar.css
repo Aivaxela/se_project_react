@@ -19,7 +19,9 @@
 
 .sidebar__avatar-null {
   min-height: 56px;
+  max-height: 56px;
   min-width: 56px;
+  max-width: 56px;
   border-radius: 50%;
   object-fit: cover;
   border: 1px solid;
