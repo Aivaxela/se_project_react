@@ -11,8 +11,9 @@ function Main({ weatherData, setSelectedCard, weatherImages, clothingItems }) {
     <main>
       <WeatherCard weatherData={weatherData} weatherImages={weatherImages} />
       <p className="cards__text">
-        Today is {Math.floor(weatherData.temp[currentTempUnit])}&deg;{" "}
-        {currentTempUnit} / You may want to wear:
+        Today is {weatherData.type} at{" "}
+        {Math.floor(weatherData.temp[currentTempUnit])}&deg; {currentTempUnit} /
+        You may want to wear:
       </p>
       <Cards
         clothingItems={clothingItems}

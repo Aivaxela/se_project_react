@@ -106,7 +106,6 @@ function App() {
 
   const handleAddItem = (newItem, resetCurrentForm) => {
     setIsLoading(true);
-    newItem._id = assignId();
     const jwt = getToken();
 
     api
@@ -182,16 +181,19 @@ function App() {
 
   const handleUpdateUser = (values, resetUpdateUserForm) => {
     const jwt = getToken();
-    api.updateCurrentUser(values, jwt);
+    api.updateCurrentUser(values, jwt).catch(console.error);
     resetUpdateUserForm();
     setActiveModal("");
-    api.getCurrentUser(jwt).then((userData) => {
-      setUserData({
-        id: userData.data._id,
-        name: userData.data.name,
-        avatarUrl: userData.data.avatarUrl,
-      });
-    });
+    api
+      .getCurrentUser(jwt)
+      .then((userData) => {
+        setUserData({
+          id: userData.data._id,
+          name: userData.data.name,
+          avatarUrl: userData.data.avatarUrl,
+        });
+      })
+      .catch(console.error);
   };
 
   const handleSignout = () => {
@@ -199,19 +201,6 @@ function App() {
     navigate("/");
     setIsLoggedIn(false);
     clearUserData();
-  };
-
-  const assignId = () => {
-    const itemsSorted = clothingItems.sort((a, b) => a._id - b._id);
-    let toCheck = 1;
-    for (let i = 0; i < itemsSorted.length; i++) {
-      if (toCheck === itemsSorted[i]._id) {
-        toCheck++;
-        continue;
-      } else {
-        return toCheck;
-      }
-    }
   };
 
   const clearUserData = () => {
