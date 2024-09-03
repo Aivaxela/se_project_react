@@ -2,7 +2,7 @@ import { useContext, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 
-export function ProtectedRoute({ children }) {
+function ProtectedRoute({ children }) {
   const { isLoggedIn, authLoaded, setProtectedDestination } =
     useContext(CurrentUserContext);
 
