@@ -13,7 +13,7 @@ function Cards({
   const { userData } = useContext(CurrentUserContext);
   const location = useLocation();
 
-  const cards = Array.from(clothingItems);
+  const cards = Array.from(clothingItems).reverse();
 
   const filteredCards = isTempFiltered
     ? cards.filter((item) => item.weather === weatherData.type)

@@ -107,7 +107,7 @@ function App() {
     api
       .addClothingItem(newItem, jwt)
       .then((res) => {
-        setClothingItems([res.data, ...clothingItems]);
+        setClothingItems([...clothingItems, res.data]);
         resetCurrentForm();
         closeActiveModal();
       })
