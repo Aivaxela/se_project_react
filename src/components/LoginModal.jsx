@@ -17,46 +17,44 @@ function LoginModal({ isOpen, handleLogin, isLoading }) {
   };
 
   return (
-    <>
-      <ModalWithForm
-        title="Log in"
-        buttonText={isLoading ? "Logging in" : "Login"}
-        altButtonText={"or Register"}
-        altButtonClick={() => setActiveModal("register")}
-        isOpen={isOpen}
-        onSubmit={handleSubmit}
-        formValid={isValid}
-      >
-        <label htmlFor="email-login" className="modal__label">
-          Email*
-          <input
-            type="email"
-            className="modal__input"
-            id="email-login"
-            name="email"
-            placeholder="Email"
-            minLength="4"
-            maxLength="64"
-            required
-            onChange={handleChange}
-            value={values.email || ""}
-          />
-        </label>
-        <label htmlFor="password-login" className="modal__label">
-          Password*
-          <input
-            type="password"
-            className="modal__input"
-            id="password-login"
-            name="password"
-            placeholder="Password"
-            required
-            onChange={handleChange}
-            value={values.password || ""}
-          />
-        </label>
-      </ModalWithForm>
-    </>
+    <ModalWithForm
+      title="Log in"
+      buttonText={isLoading ? "Logging in" : "Login"}
+      altButtonText={"or Register"}
+      altButtonClick={() => setActiveModal("register")}
+      isOpen={isOpen}
+      onSubmit={handleSubmit}
+      formValid={isValid}
+    >
+      <label htmlFor="email-login" className="modal__label">
+        Email*
+        <input
+          type="email"
+          className="modal__input"
+          id="email-login"
+          name="email"
+          placeholder="Email"
+          minLength="4"
+          maxLength="64"
+          required
+          onChange={handleChange}
+          value={values.email || ""}
+        />
+      </label>
+      <label htmlFor="password-login" className="modal__label">
+        Password*
+        <input
+          type="password"
+          className="modal__input"
+          id="password-login"
+          name="password"
+          placeholder="Password"
+          required
+          onChange={handleChange}
+          value={values.password || ""}
+        />
+      </label>
+    </ModalWithForm>
   );
 }
 
