@@ -178,7 +178,6 @@ function App() {
     const jwt = getToken();
     api
       .updateCurrentUser(values, jwt)
-      .catch(console.error)
       .then((userData) => {
         setUserData({
           id: userData.data._id,
