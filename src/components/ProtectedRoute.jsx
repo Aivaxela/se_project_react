@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 
@@ -22,9 +22,9 @@ function ProtectedRoute({ children }) {
     setProtectedDestination,
   ]);
 
-  if (!authLoaded) return null;
-  if (isLoggedIn) return <>{children}</>;
-  return null;
+  if (!authLoaded) return <React.Fragment></React.Fragment>;
+  if (isLoggedIn) return <React.Fragment>{children}</React.Fragment>;
+  return <React.Fragment></React.Fragment>;
 }
 
 export default ProtectedRoute;
