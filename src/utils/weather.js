@@ -4,7 +4,7 @@ export const getWeather = ({ lat, lon }, APIkey) => {
   ).then((res) => checkResponse(res));
 };
 
-function checkResponse(res) {
+export function checkResponse(res) {
   if (res.ok) {
     return res.json();
   }

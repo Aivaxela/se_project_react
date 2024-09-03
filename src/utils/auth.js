@@ -1,4 +1,5 @@
 export const BASE_URL = "http://localhost:3001";
+import { checkResponse } from "../utils/weather.js";
 
 export const register = ({ username, password, email, avatarUrl }) => {
   return fetch(`${BASE_URL}/signup`, {
@@ -8,9 +9,7 @@ export const register = ({ username, password, email, avatarUrl }) => {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({ name: username, password, email, avatarUrl }),
-  }).then((res) => {
-    return res.ok ? res.json() : Promise.reject(`Error ${res.status}`);
-  });
+  }).then((res) => checkResponse(res));
 };
 
 export const authorize = ({ email, password }) => {
