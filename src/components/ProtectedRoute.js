@@ -23,7 +23,7 @@ export function ProtectedRoute({ children }) {
   ]);
 
   if (!authLoaded) return null;
-  if (isLoggedIn) return children;
+  if (isLoggedIn) return <>{children}</>;
   return null;
 }
 
