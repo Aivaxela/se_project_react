@@ -20,7 +20,5 @@ export const authorize = ({ email, password }) => {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({ email, password }),
-  }).then((res) => {
-    return res.ok ? res.json() : Promise.reject(`Error ${res.status}`);
-  });
+  }).then((res) => checkResponse(res));
 };

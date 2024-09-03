@@ -176,17 +176,17 @@ function App() {
 
   const handleUpdateUser = (values, resetUpdateUserForm) => {
     const jwt = getToken();
-    api.updateCurrentUser(values, jwt).catch(console.error);
-    resetUpdateUserForm();
-    closeActiveModal();
     api
-      .getCurrentUser(jwt)
+      .updateCurrentUser(values, jwt)
+      .catch(console.error)
       .then((userData) => {
         setUserData({
           id: userData.data._id,
           name: userData.data.name,
           avatarUrl: userData.data.avatarUrl,
         });
+        resetUpdateUserForm();
+        closeActiveModal();
       })
       .catch(console.error);
   };
