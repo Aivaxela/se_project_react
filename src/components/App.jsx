@@ -18,13 +18,15 @@ import LoginModal from "./LoginModal.jsx";
 import ItemModal from "./ItemModal.jsx";
 import UpdateUserModal from "./UpdateUserModal.jsx";
 import DeleteConfirmModal from "./DeleteConfirmModal.jsx";
-import ProtectedRoute from "../utils/ProtectedRoute.js";
+import ProtectedRoute from "./ProtectedRoute.jsx";
 import {
   currentDate,
   APIkey,
   coords,
   weatherCardImages,
 } from "../utils/constants.js";
+
+const api = new Api("http://localhost:3001");
 
 function App() {
   const [activeModal, setActiveModal] = useState("");
@@ -49,9 +51,6 @@ function App() {
       weather: "",
     },
   ]);
-
-  const baseUrl = "http://localhost:3001";
-  const api = useMemo(() => new Api({ baseUrl }), [baseUrl]);
   const navigate = useNavigate();
 
   const getClothingItems = useCallback(() => {
@@ -96,7 +95,7 @@ function App() {
 
   useEffect(() => {
     if (!activeModal) return;
-    const handleEscClose = (e) => e.key === "Escape" && setActiveModal("");
+    const handleEscClose = (e) => e.key === "Escape" && closeActiveModal();
     document.addEventListener("keydown", handleEscClose);
     return () => document.removeEventListener("keydown", handleEscClose);
   }, [activeModal]);
@@ -110,7 +109,7 @@ function App() {
       .then((res) => {
         setClothingItems([res, ...clothingItems]);
         resetCurrentForm();
-        setActiveModal("");
+        closeActiveModal();
         getClothingItems();
       })
       .catch((err) => alert(err))
@@ -128,7 +127,7 @@ function App() {
           (item) => item._id !== selectedCard._id
         );
         setClothingItems(updatedArr);
-        setActiveModal("");
+        closeActiveModal();
       })
       .catch((err) => alert(err));
   };
@@ -172,7 +171,7 @@ function App() {
     });
     setIsLoggedIn(true);
     navigate(protectedDestination || "/");
-    setActiveModal("");
+    closeActiveModal();
     setProtectedDestination("");
   };
 
@@ -180,7 +179,7 @@ function App() {
     const jwt = getToken();
     api.updateCurrentUser(values, jwt).catch(console.error);
     resetUpdateUserForm();
-    setActiveModal("");
+    closeActiveModal();
     api
       .getCurrentUser(jwt)
       .then((userData) => {
@@ -223,6 +222,10 @@ function App() {
 
   const clearUserData = () => {
     setUserData({ id: "", name: "", avatarUrl: "" });
+  };
+
+  const closeActiveModal = () => {
+    setActiveModal("");
   };
 
   const currentTempContext = {
