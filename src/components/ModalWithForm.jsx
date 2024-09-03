@@ -13,7 +13,7 @@ function ModalWithForm({
   onSubmit,
   formValid,
 }) {
-  const { setActiveModal } = useContext(AppContext);
+  const { closeActiveModal } = useContext(AppContext);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -27,7 +27,7 @@ function ModalWithForm({
         <button
           className="modal__close"
           type="button"
-          onClick={() => setActiveModal("")}
+          onClick={closeActiveModal}
         >
           <img src={close} alt="close button" className="modal__close-icon" />
         </button>

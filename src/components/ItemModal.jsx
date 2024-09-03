@@ -6,7 +6,7 @@ import { AppContext } from "../contexts/AppContext";
 
 function ItemModal({ card, isOpen }) {
   const { userData } = useContext(CurrentUserContext);
-  const { setActiveModal } = useContext(AppContext);
+  const { setActiveModal, closeActiveModal } = useContext(AppContext);
 
   return (
     <div className={`modal ${isOpen ? "modal_opened" : ""}`}>
@@ -14,7 +14,7 @@ function ItemModal({ card, isOpen }) {
         <button
           className="modal__close"
           type="button"
-          onClick={() => setActiveModal("")}
+          onClick={closeActiveModal}
         >
           <img src={close} alt="close button" className="modal__close-icon" />
         </button>

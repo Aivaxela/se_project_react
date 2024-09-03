@@ -3,7 +3,7 @@ import close from "../assets/close.svg";
 import { AppContext } from "../contexts/AppContext";
 
 function DeleteConfirmModal({ isOpen, onDeleteClick }) {
-  const { setActiveModal } = useContext(AppContext);
+  const { closeActiveModal } = useContext(AppContext);
 
   return (
     <div className={`modal ${isOpen ? "modal_opened" : ""}`}>
@@ -11,7 +11,7 @@ function DeleteConfirmModal({ isOpen, onDeleteClick }) {
         <button
           className="modal__close"
           type="button"
-          onClick={() => setActiveModal("")}
+          onClick={closeActiveModal}
         >
           <img src={close} alt="close button" className="modal__close-icon" />
         </button>
@@ -30,7 +30,7 @@ function DeleteConfirmModal({ isOpen, onDeleteClick }) {
           </p>
           <p
             className="modal__subtext modal__el_hovered"
-            onClick={() => setActiveModal("")}
+            onClick={closeActiveModal}
           >
             Cancel
           </p>

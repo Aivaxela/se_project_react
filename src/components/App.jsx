@@ -107,10 +107,9 @@ function App() {
     api
       .addClothingItem(newItem, jwt)
       .then((res) => {
-        setClothingItems([res, ...clothingItems]);
+        setClothingItems([res.data, ...clothingItems]);
         resetCurrentForm();
         closeActiveModal();
-        getClothingItems();
       })
       .catch((err) => alert(err))
       .finally(() => {
@@ -210,7 +209,7 @@ function App() {
               cards.map((item) => (item._id === id ? updatedCard.data : item))
             );
           })
-          .catch((err) => console.log(err));
+          .catch(console.error);
   };
 
   const handleSignout = () => {
@@ -243,6 +242,7 @@ function App() {
 
   const currentAppContext = {
     setActiveModal,
+    closeActiveModal,
   };
 
   return (
