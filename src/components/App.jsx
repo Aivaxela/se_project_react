@@ -26,7 +26,7 @@ import {
   weatherCardImages,
 } from "../utils/constants.js";
 
-const api = new Api("http://localhost:3001");
+const api = new Api({ baseUrl: "http://localhost:3001" });
 
 function App() {
   const [activeModal, setActiveModal] = useState("");
