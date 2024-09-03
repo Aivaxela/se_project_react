@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Routes, Route, useNavigate } from "react-router-dom";
 import { getWeather, filterWeatherData } from "../utils/weather.js";
 import { register, authorize } from "../utils/auth.js";
@@ -58,7 +58,7 @@ function App() {
       .getClothingItems()
       .then((res) => setClothingItems(res.data))
       .catch((err) => alert(err));
-  }, [api]);
+  }, []);
 
   useEffect(() => {
     getClothingItems();
@@ -87,7 +87,7 @@ function App() {
         });
       })
       .catch(console.error);
-  }, [getClothingItems, api]);
+  }, [getClothingItems]);
 
   useEffect(() => {
     if (protectedDestination != "") setActiveModal("login");
