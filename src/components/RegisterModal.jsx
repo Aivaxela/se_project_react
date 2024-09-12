@@ -81,7 +81,7 @@ function RegisterModal({ isOpen, isLoading, handleRegistration }) {
           id="name-signup"
           name="username"
           placeholder="Name"
-          minLength="4"
+          minLength="2"
           maxLength="16"
           required
           onChange={handleChange}

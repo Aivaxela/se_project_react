@@ -35,7 +35,7 @@ function AddItemModal({ isOpen, onAddItem, isLoading }) {
           id="name-addItem"
           name="name"
           placeholder="Name"
-          minLength="4"
+          minLength="2"
           maxLength="16"
           required
           onChange={handleChange}

@@ -36,7 +36,7 @@ function UpdateUserModal({ isOpen, handleUpdateUser, isLoading }) {
           id="name-update"
           name="username"
           placeholder="Name"
-          minLength="4"
+          minLength="2"
           maxLength="64"
           required
           onChange={handleChange}

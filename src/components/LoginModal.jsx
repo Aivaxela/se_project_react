@@ -34,7 +34,7 @@ function LoginModal({ isOpen, handleLogin, isLoading }) {
           id="email-login"
           name="email"
           placeholder="Email"
-          minLength="4"
+          minLength="2"
           maxLength="64"
           required
           onChange={handleChange}
