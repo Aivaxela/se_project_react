@@ -82,7 +82,7 @@ function RegisterModal({ isOpen, isLoading, handleRegistration }) {
           name="username"
           placeholder="Name"
           minLength="2"
-          maxLength="16"
+          maxLength="30"
           required
           onChange={handleChange}
           value={values.username || ""}

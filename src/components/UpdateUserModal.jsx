@@ -37,7 +37,7 @@ function UpdateUserModal({ isOpen, handleUpdateUser, isLoading }) {
           name="username"
           placeholder="Name"
           minLength="2"
-          maxLength="64"
+          maxLength="30"
           required
           onChange={handleChange}
           value={values.username || ""}
