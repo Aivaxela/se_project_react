@@ -28,7 +28,7 @@ import {
 
 const baseUrl =
   process.env.NODE_ENV === "production"
-    ? "https://wtwrmarcum.crabdance.com"
+    ? "https://api.wtwrmarcum.crabdance.com"
     : "http://localhost:3001";
 const api = new Api({ baseUrl });
 
