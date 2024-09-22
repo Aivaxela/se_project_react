@@ -43,7 +43,6 @@ export default class Api {
         Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify({
-        _id: item._id,
         name: item.name,
         weather: item.weather,
         imageUrl: item.imageUrl,
