@@ -30,4 +30,7 @@ module.exports = {
       files: ["*.js", "*.jsx"],
     },
   ],
+  globals: {
+    process: "readonly",
+  },
 };
