@@ -26,7 +26,11 @@ import {
   weatherCardImages,
 } from "../utils/constants.js";
 
-const api = new Api({ baseUrl: "http://localhost:3001" });
+const baseUrl =
+  process.env.NODE_ENV === "production"
+    ? "https://wtwrmarcum.crabdance.com"
+    : "http://localhost:3001";
+const api = new Api({ baseUrl });
 
 function App() {
   const [activeModal, setActiveModal] = useState("");

@@ -1,6 +1,6 @@
 {
   "name": "vite-project",
-  "homepage": "https://aivaxela.github.io/se_project_react/",
+  "homepage": "https://wtwrmarcum.crabdance.com",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -10,7 +10,7 @@
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist",
+    "deploy": "npm run build && scp -r ./dist/* tripletenuser@domainname.example.com:/home/tripletenuser/frontend",
     "dbstart": "json-server --watch db.json --id _id --port 3001"
   },
   "dependencies": {
