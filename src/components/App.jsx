@@ -90,7 +90,7 @@ function App() {
           avatarUrl: userData.data.avatarUrl,
         });
       })
-      .catch(console.error);
+      .catch((err) => alert(err));
   }, [getClothingItems]);
 
   useEffect(() => {
@@ -149,7 +149,7 @@ function App() {
           resetRegistrationForm();
         }
       })
-      .catch(console.error);
+      .catch((err) => alert(err));
   };
 
   const handleLogin = (values, resetLoginForm) => {
@@ -162,7 +162,7 @@ function App() {
           resetLoginForm();
         }
       })
-      .catch(console.error);
+      .catch((err) => alert(err));
   };
 
   const loginProcesses = (userData) => {
@@ -191,7 +191,7 @@ function App() {
         resetUpdateUserForm();
         closeActiveModal();
       })
-      .catch(console.error);
+      .catch((err) => alert(err));
   };
 
   const handleCardLike = ({ id, isLiked }) => {
@@ -204,7 +204,7 @@ function App() {
               cards.map((item) => (item._id === id ? updatedCard.data : item))
             );
           })
-          .catch((err) => console.log(err))
+          .catch((err) => alert(err))
       : api
           .deleteCardLike(id, jwt)
           .then((updatedCard) => {
@@ -212,7 +212,7 @@ function App() {
               cards.map((item) => (item._id === id ? updatedCard.data : item))
             );
           })
-          .catch(console.error);
+          .catch((err) => alert(err));
   };
 
   const handleSignout = () => {
