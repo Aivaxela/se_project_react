@@ -85,6 +85,9 @@ export default class Api {
     if (res.ok) {
       return res.json();
     }
-    return Promise.reject(`Error: ${res.status}`);
+
+    return res.json().then((err) => {
+      return Promise.reject(`Error: ${res.status} - ${err.message}`);
+    });
   }
 }
