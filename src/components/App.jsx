@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
-import { Routes, Route, useNavigate } from "react-router-dom";
+import { Routes, Route, useNavigate, Navigate } from "react-router-dom";
 import { getWeather, filterWeatherData } from "../utils/weather.js";
 import { register, authorize } from "../utils/auth.js";
 import { setToken, getToken, removeToken } from "../utils/token.js";
@@ -287,6 +287,7 @@ function App() {
                     </ProtectedRoute>
                   }
                 />
+                <Route path="*" element={<Navigate to="/" replace />} />
               </Routes>
               <Footer />
               <AddItemModal
