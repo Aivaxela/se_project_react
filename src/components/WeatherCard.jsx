@@ -4,7 +4,10 @@ import { CurrentTempContext } from "../contexts/CurrentTemperatureContext";
 
 function WeatherCard({ weatherData, weatherImages }) {
   const weatherCardImage = weatherImages.find((item) => {
-    return item.name === weatherData.weather && item.day === weatherData.isDay;
+    return (
+      (item.name === weatherData.weather && item.day === weatherData.isDay) ??
+      item.name === "clear"
+    );
   });
   const { currentTempUnit } = useContext(CurrentTempContext);
 
