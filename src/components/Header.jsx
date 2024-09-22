@@ -58,16 +58,16 @@ function Header({ date, weatherData }) {
           <div className={"header__name-and-avatar"}>
             <p className="header__username">{userData.name}</p>
             <img
-              src={userData.avatarUrl}
+              src={userData.avatar}
               alt="avatar"
               className={`header__avatar header__el_hovered ${
-                !userData.avatarUrl ? "header__el_hidden" : ""
+                !userData.avatar ? "header__el_hidden" : ""
               }`}
             />
             <div
               alt="no avatar"
               className={`header__avatar-null header__el_hovered ${
-                userData.avatarUrl ? "header__el_hidden" : ""
+                userData.avatar ? "header__el_hidden" : ""
               }`}
             >
               <p className="header__avatar-null-text">{userData.name[0]}</p>

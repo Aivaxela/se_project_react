@@ -9,7 +9,7 @@ function UpdateUserModal({ isOpen, handleUpdateUser, isLoading }) {
     useFormAndValidation();
 
   useEffect(() => {
-    setValues({ username: userData.name, avatarUrl: userData.avatarUrl });
+    setValues({ username: userData.name, avatar: userData.avatar });
   }, [isOpen, setValues, userData]);
 
   const handleSubmit = () => {
@@ -17,7 +17,7 @@ function UpdateUserModal({ isOpen, handleUpdateUser, isLoading }) {
   };
 
   const resetCurrentForm = () => {
-    resetForm({ username: "", avatarUrl: "" });
+    resetForm({ username: "", avatar: "" });
   };
 
   return (
@@ -51,24 +51,24 @@ function UpdateUserModal({ isOpen, handleUpdateUser, isLoading }) {
           {errors.username}
         </span>
       </label>
-      <label htmlFor="avatarUrl-update" className="modal__label">
+      <label htmlFor="avatar-update" className="modal__label">
         Avatar URL
         <input
           type="url"
           className="modal__input"
-          id="avatarUrl-update"
-          name="avatarUrl"
+          id="avatar-update"
+          name="avatar"
           placeholder="Avatar Url"
           onChange={handleChange}
-          value={values.avatarUrl || ""}
+          value={values.avatar || ""}
         />
         <span
           className={`modal__input-error ${
-            errors.avatarUrl ? "modal__input-error_visible" : ""
+            errors.avatar ? "modal__input-error_visible" : ""
           }`}
-          id="avatarUrl-error"
+          id="avatar-error"
         >
-          {errors.avatarUrl}
+          {errors.avatar}
         </span>
       </label>
     </ModalWithForm>

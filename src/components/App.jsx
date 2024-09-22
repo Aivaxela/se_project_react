@@ -38,7 +38,7 @@ function App() {
   const [currentTempUnit, setCurrentTempUnit] = useState("F");
   const [isLoading, setIsLoading] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [userData, setUserData] = useState({ id: "", name: "", avatarUrl: "" });
+  const [userData, setUserData] = useState({ id: "", name: "", avatar: "" });
   const [protectedDestination, setProtectedDestination] = useState("");
   const [authLoaded, setAuthLoaded] = useState(false);
   const [weatherData, setWeatherData] = useState({
@@ -87,7 +87,7 @@ function App() {
         setUserData({
           id: userData.data._id,
           name: userData.data.name,
-          avatarUrl: userData.data.avatarUrl,
+          avatar: userData.data.avatar,
         });
       })
       .catch((err) => alert(err));
@@ -170,7 +170,7 @@ function App() {
     setUserData({
       id: userData.id,
       name: userData.name,
-      avatarUrl: userData?.avatarUrl,
+      avatar: userData?.avatar,
     });
     setIsLoggedIn(true);
     navigate(protectedDestination || "/");
@@ -186,7 +186,7 @@ function App() {
         setUserData({
           id: userData.data._id,
           name: userData.data.name,
-          avatarUrl: userData.data.avatarUrl,
+          avatar: userData.data.avatar,
         });
         resetUpdateUserForm();
         closeActiveModal();
@@ -223,7 +223,7 @@ function App() {
   };
 
   const clearUserData = () => {
-    setUserData({ id: "", name: "", avatarUrl: "" });
+    setUserData({ id: "", name: "", avatar: "" });
   };
 
   const closeActiveModal = () => {

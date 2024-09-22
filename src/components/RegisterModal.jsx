@@ -14,7 +14,7 @@ function RegisterModal({ isOpen, isLoading, handleRegistration }) {
   };
 
   const resetCurrentForm = () => {
-    resetForm({ email: "", password: "", username: "", avatarUrl: "" });
+    resetForm({ email: "", password: "", username: "", avatar: "" });
   };
 
   return (
@@ -96,24 +96,24 @@ function RegisterModal({ isOpen, isLoading, handleRegistration }) {
           {errors.username}
         </span>
       </label>
-      <label htmlFor="avatarUrl" className="modal__label">
+      <label htmlFor="avatar" className="modal__label">
         Avatar URL
         <input
           type="url"
           className="modal__input"
-          id="avatarUrl"
-          name="avatarUrl"
+          id="avatar"
+          name="avatar"
           placeholder="Avatar Url"
           onChange={handleChange}
-          value={values.avatarUrl || ""}
+          value={values.avatar || ""}
         />
         <span
           className={`modal__input-error ${
-            errors.avatarUrl ? "modal__input-error_visible" : ""
+            errors.avatar ? "modal__input-error_visible" : ""
           }`}
-          id="avatarUrl-error"
+          id="avatar-error"
         >
-          {errors.avatarUrl}
+          {errors.avatar}
         </span>
       </label>
     </ModalWithForm>

@@ -14,16 +14,16 @@ function SideBar({ handleSignout }) {
     <section className="sidebar">
       <div className="sidebar__user-container">
         <img
-          src={userData.avatarUrl}
+          src={userData.avatar}
           alt="avatar"
           className={`sidebar__avatar ${
-            !userData.avatarUrl ? "sidebar__el_hidden" : ""
+            !userData.avatar ? "sidebar__el_hidden" : ""
           }`}
         />
         <div
           alt="no avatar"
           className={`sidebar__avatar-null ${
-            userData.avatarUrl ? "sidebar__el_hidden" : ""
+            userData.avatar ? "sidebar__el_hidden" : ""
           }`}
         >
           <p className="sidebar__avatar-null-text">{userData.name[0]}</p>

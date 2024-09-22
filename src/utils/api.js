@@ -24,7 +24,7 @@ export default class Api {
       },
       body: JSON.stringify({
         name: newData.username,
-        avatarUrl: newData.avatarUrl,
+        avatar: newData.avatar,
       }),
     }).then((res) => this._checkResponse(res));
   };
